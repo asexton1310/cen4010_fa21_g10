@@ -1,0 +1,632 @@
+{
+    "mockup": {
+        "controls": {
+            "control": [
+                {
+                    "ID": "0",
+                    "typeID": "BrowserWindow",
+                    "zOrder": "0",
+                    "w": "1266",
+                    "h": "930",
+                    "measuredW": "450",
+                    "measuredH": "400",
+                    "x": "0",
+                    "y": "0",
+                    "properties": {
+                        "text": "Relay\nhttps://lamp.cse.fau.edu/~cen4010_fa21_g10/\n"
+                    }
+                },
+                {
+                    "ID": "7",
+                    "typeID": "Canvas",
+                    "zOrder": "1",
+                    "w": "1266",
+                    "h": "60",
+                    "measuredW": "100",
+                    "measuredH": "70",
+                    "x": "0",
+                    "y": "72",
+                    "properties": {
+                        "color": "10066329"
+                    }
+                },
+                {
+                    "ID": "8",
+                    "typeID": "SearchBox",
+                    "zOrder": "2",
+                    "w": "137",
+                    "measuredW": "120",
+                    "measuredH": "25",
+                    "x": "129",
+                    "y": "89",
+                    "properties": {
+                        "text": "search Relay"
+                    }
+                },
+                {
+                    "ID": "11",
+                    "typeID": "Image",
+                    "zOrder": "3",
+                    "w": "55",
+                    "h": "55",
+                    "measuredW": "556",
+                    "measuredH": "449",
+                    "x": "66",
+                    "y": "74",
+                    "properties": {
+                        "src": {
+                            "ID": "ECD653F1-4A8A-4DDC-B83E-6450BC6E2D16"
+                        }
+                    }
+                },
+                {
+                    "ID": "13",
+                    "typeID": "Icon",
+                    "zOrder": "4",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1095",
+                    "y": "78",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "14",
+                    "typeID": "Icon",
+                    "zOrder": "5",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1156",
+                    "y": "78",
+                    "properties": {
+                        "icon": {
+                            "ID": "users",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "16",
+                    "typeID": "Icon",
+                    "zOrder": "6",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "1212",
+                    "y": "78",
+                    "properties": {
+                        "icon": {
+                            "ID": "sign-out",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "17",
+                    "typeID": "Canvas",
+                    "zOrder": "7",
+                    "w": "902",
+                    "h": "772",
+                    "measuredW": "100",
+                    "measuredH": "70",
+                    "x": "166",
+                    "y": "129"
+                },
+                {
+                    "ID": "18",
+                    "typeID": "VerticalScrollBar",
+                    "zOrder": "8",
+                    "h": "772",
+                    "measuredW": "16",
+                    "measuredH": "100",
+                    "x": "1052",
+                    "y": "129"
+                },
+                {
+                    "ID": "19",
+                    "typeID": "Title",
+                    "zOrder": "9",
+                    "w": "140",
+                    "measuredW": "111",
+                    "measuredH": "24",
+                    "x": "1095",
+                    "y": "129",
+                    "properties": {
+                        "text": "Live Friends",
+                        "size": "20",
+                        "align": "center"
+                    }
+                },
+                {
+                    "ID": "20",
+                    "typeID": "VerticalScrollBar",
+                    "zOrder": "10",
+                    "h": "770",
+                    "measuredW": "16",
+                    "measuredH": "100",
+                    "x": "1246",
+                    "y": "131"
+                },
+                {
+                    "ID": "22",
+                    "typeID": "ButtonBar",
+                    "zOrder": "11",
+                    "w": "383",
+                    "h": "37",
+                    "measuredW": "287",
+                    "measuredH": "27",
+                    "x": "425",
+                    "y": "83",
+                    "properties": {
+                        "text": "Community Feed, Personal Feed, Post"
+                    }
+                },
+                {
+                    "ID": "23",
+                    "typeID": "Canvas",
+                    "zOrder": "12",
+                    "w": "820",
+                    "h": "347",
+                    "measuredW": "100",
+                    "measuredH": "70",
+                    "x": "207",
+                    "y": "136"
+                },
+                {
+                    "ID": "24",
+                    "typeID": "Icon",
+                    "zOrder": "13",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "223",
+                    "y": "152",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "25",
+                    "typeID": "TextArea",
+                    "zOrder": "14",
+                    "w": "146",
+                    "h": "27",
+                    "measuredW": "200",
+                    "measuredH": "140",
+                    "x": "282",
+                    "y": "162",
+                    "properties": {
+                        "text": "User_Name"
+                    }
+                },
+                {
+                    "ID": "26",
+                    "typeID": "Icon",
+                    "zOrder": "15",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "502",
+                    "y": "427",
+                    "properties": {
+                        "icon": {
+                            "ID": "heart-o",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "27",
+                    "typeID": "Icon",
+                    "zOrder": "16",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "576",
+                    "y": "423",
+                    "properties": {
+                        "icon": {
+                            "ID": "comment-o",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "28",
+                    "typeID": "Icon",
+                    "zOrder": "17",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "660",
+                    "y": "427",
+                    "properties": {
+                        "icon": {
+                            "ID": "share-square-o",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "29",
+                    "typeID": "TextArea",
+                    "zOrder": "18",
+                    "w": "729",
+                    "h": "227",
+                    "measuredW": "200",
+                    "measuredH": "140",
+                    "x": "271",
+                    "y": "196",
+                    "properties": {
+                        "text": "Short Post Example",
+                        "align": "center"
+                    }
+                },
+                {
+                    "ID": "38",
+                    "typeID": "Canvas",
+                    "zOrder": "19",
+                    "w": "820",
+                    "h": "347",
+                    "measuredW": "100",
+                    "measuredH": "70",
+                    "x": "207",
+                    "y": "483"
+                },
+                {
+                    "ID": "39",
+                    "typeID": "Icon",
+                    "zOrder": "20",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "223",
+                    "y": "499",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "40",
+                    "typeID": "TextArea",
+                    "zOrder": "21",
+                    "w": "146",
+                    "h": "27",
+                    "measuredW": "200",
+                    "measuredH": "140",
+                    "x": "282",
+                    "y": "509",
+                    "properties": {
+                        "text": "User_Name"
+                    }
+                },
+                {
+                    "ID": "41",
+                    "typeID": "Icon",
+                    "zOrder": "22",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "502",
+                    "y": "774",
+                    "properties": {
+                        "icon": {
+                            "ID": "heart-o",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "42",
+                    "typeID": "Icon",
+                    "zOrder": "23",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "593",
+                    "y": "770",
+                    "properties": {
+                        "icon": {
+                            "ID": "comment-o",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "43",
+                    "typeID": "Icon",
+                    "zOrder": "24",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "676",
+                    "y": "774",
+                    "properties": {
+                        "icon": {
+                            "ID": "share-square-o",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "44",
+                    "typeID": "TextArea",
+                    "zOrder": "25",
+                    "w": "729",
+                    "h": "227",
+                    "measuredW": "200",
+                    "measuredH": "140",
+                    "x": "271",
+                    "y": "543",
+                    "properties": {
+                        "text": "Long Post Example Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridic"
+                    }
+                },
+                {
+                    "ID": "46",
+                    "typeID": "Button",
+                    "zOrder": "26",
+                    "measuredW": "98",
+                    "measuredH": "27",
+                    "x": "902",
+                    "y": "743",
+                    "properties": {
+                        "text": "Expand Post"
+                    }
+                },
+                {
+                    "ID": "47",
+                    "typeID": "Image",
+                    "zOrder": "27",
+                    "w": "355",
+                    "h": "184",
+                    "measuredW": "768",
+                    "measuredH": "492",
+                    "x": "466",
+                    "y": "227",
+                    "properties": {
+                        "src": {
+                            "ID": "437A9512-C679-4F6B-83FD-7F8CD7034E56"
+                        }
+                    }
+                },
+                {
+                    "ID": "48",
+                    "typeID": "Icon",
+                    "zOrder": "28",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "2",
+                    "y": "146",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "49",
+                    "typeID": "TextArea",
+                    "zOrder": "29",
+                    "w": "116",
+                    "h": "27",
+                    "measuredW": "200",
+                    "measuredH": "140",
+                    "x": "50",
+                    "y": "156",
+                    "properties": {
+                        "text": "My_User_Name"
+                    }
+                },
+                {
+                    "ID": "50",
+                    "typeID": "Icon",
+                    "zOrder": "30",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "2",
+                    "y": "200",
+                    "properties": {
+                        "icon": {
+                            "ID": "users",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "51",
+                    "typeID": "TextArea",
+                    "zOrder": "31",
+                    "w": "116",
+                    "h": "27",
+                    "measuredW": "200",
+                    "measuredH": "140",
+                    "x": "50",
+                    "y": "210",
+                    "properties": {
+                        "text": "All Friends"
+                    }
+                },
+                {
+                    "ID": "52",
+                    "typeID": "Icon",
+                    "zOrder": "32",
+                    "measuredW": "48",
+                    "measuredH": "48",
+                    "x": "2",
+                    "y": "253",
+                    "properties": {
+                        "icon": {
+                            "ID": "commenting",
+                            "size": "large"
+                        }
+                    }
+                },
+                {
+                    "ID": "53",
+                    "typeID": "TextArea",
+                    "zOrder": "33",
+                    "w": "116",
+                    "h": "27",
+                    "measuredW": "200",
+                    "measuredH": "140",
+                    "x": "50",
+                    "y": "263",
+                    "properties": {
+                        "text": "Live Chats"
+                    }
+                },
+                {
+                    "ID": "54",
+                    "typeID": "Icon",
+                    "zOrder": "34",
+                    "measuredW": "32",
+                    "measuredH": "32",
+                    "x": "1079",
+                    "y": "172",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle",
+                            "size": "medium"
+                        }
+                    }
+                },
+                {
+                    "ID": "55",
+                    "typeID": "TextArea",
+                    "zOrder": "35",
+                    "w": "87",
+                    "h": "27",
+                    "measuredW": "200",
+                    "measuredH": "140",
+                    "x": "1111",
+                    "y": "174",
+                    "properties": {
+                        "text": "Live_User_1\n",
+                        "size": "12"
+                    }
+                },
+                {
+                    "ID": "56",
+                    "typeID": "Icon",
+                    "zOrder": "36",
+                    "measuredW": "32",
+                    "measuredH": "32",
+                    "x": "1198",
+                    "y": "172",
+                    "properties": {
+                        "icon": {
+                            "ID": "comments",
+                            "size": "medium"
+                        }
+                    }
+                },
+                {
+                    "ID": "57",
+                    "typeID": "Icon",
+                    "zOrder": "37",
+                    "measuredW": "32",
+                    "measuredH": "32",
+                    "x": "1079",
+                    "y": "208",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle",
+                            "size": "medium"
+                        }
+                    }
+                },
+                {
+                    "ID": "58",
+                    "typeID": "TextArea",
+                    "zOrder": "38",
+                    "w": "87",
+                    "h": "27",
+                    "measuredW": "200",
+                    "measuredH": "140",
+                    "x": "1111",
+                    "y": "210",
+                    "properties": {
+                        "size": "12",
+                        "text": "Live_User_2"
+                    }
+                },
+                {
+                    "ID": "59",
+                    "typeID": "Icon",
+                    "zOrder": "39",
+                    "measuredW": "32",
+                    "measuredH": "32",
+                    "x": "1198",
+                    "y": "208",
+                    "properties": {
+                        "icon": {
+                            "ID": "comments",
+                            "size": "medium"
+                        }
+                    }
+                },
+                {
+                    "ID": "60",
+                    "typeID": "Icon",
+                    "zOrder": "40",
+                    "measuredW": "32",
+                    "measuredH": "32",
+                    "x": "1079",
+                    "y": "240",
+                    "properties": {
+                        "icon": {
+                            "ID": "user-circle",
+                            "size": "medium"
+                        }
+                    }
+                },
+                {
+                    "ID": "61",
+                    "typeID": "TextArea",
+                    "zOrder": "41",
+                    "w": "87",
+                    "h": "27",
+                    "measuredW": "200",
+                    "measuredH": "140",
+                    "x": "1111",
+                    "y": "242",
+                    "properties": {
+                        "size": "12",
+                        "text": "Live_User_3"
+                    }
+                },
+                {
+                    "ID": "62",
+                    "typeID": "Icon",
+                    "zOrder": "42",
+                    "measuredW": "32",
+                    "measuredH": "32",
+                    "x": "1198",
+                    "y": "240",
+                    "properties": {
+                        "icon": {
+                            "ID": "comments",
+                            "size": "medium"
+                        }
+                    }
+                }
+            ]
+        },
+        "attributes": {
+            "name": "New Wireframe 1",
+            "order": 1000000,
+            "parentID": null,
+            "notes": null
+        },
+        "branchID": "Master",
+        "resourceID": "37D6B95B-51B2-4744-9874-7C0C91F1ABA8",
+        "mockupH": "930",
+        "mockupW": "1266",
+        "measuredW": "1266",
+        "measuredH": "930",
+        "version": "1.0"
+    }
+}
