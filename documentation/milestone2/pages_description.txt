@@ -1,22 +1,7 @@
-Pages mentioned in Milestone 1 proposal
-Home page: Options to log in (on this page), create an account (go to different page). Also displays some public posts in a feed.
+Home page: Add username/password fields and a login button
+Create account page: Add firstname / lastname fields
+User dashboard: add firstname / lastname fields
+Relay posts: Add second text field to Long Post 1 showing where the user would write their Teaser. Add button to Long Post 2 letting them return to editing
 
-Create an account: Fields to enter an email, password, re-enter password, first and last name. Create account button (redirects to main page)
-
-Create short post: Overlay on main page that provides a text field for up to 200 characters, and buttons for adding images/video, and a button that immediately converts the post to a long post (adds second text field with no limit).
-
-Create short post: Alternate version of create short post that has a second larger text box with no character limit. Smaller textbox is used as a Teaser, larger textbox for the post content.
-
-Search results: Displays posts and users found by the search, a search bar to search again, and a button to return to the main page.
-
-Chatroom: Displays messages sent in the chatroom, a list of all participants currently in the chatroom and an indicator of when they are typing. Also provides a text field for entering messages and buttons to attach images or video. There are also buttons to leave the chatroom, or invite other friends.
-
-Manage friends: A page that displays all of a member’s friends, each one’s current Friendship Level, and a button to change it. Also displays all pending friend requests and gives the option to accept or decline each one.
-
-
-Pages not explicitly mentioned in Milestone 1 proposal
-Main page: Similar to the home page for users that are not logged in. Has a feed displaying some posts the user is permitted to see, a search bar, and buttons for creating a post and managing friends/account settings. May also display a list of friends currently online on the website and an option to send a chatroom request to them.
-
-Long post view: When a user expands a long post’s Teaser, it takes up the majority of their screen. Like short posts it provides buttons for commenting and liking the post.
-
-User view: When a user clicks on another user’s account, it opens a page with a feed containing this user’s posts. It also displays their name and profile picture, and provides buttons for sending a friend request if the users are not already friends. If this user is already a friend, there is an indicator for whether they are online or not and buttons to unfriend the user, adjust friendship level, or send a chatroom request (disabled/grayed out, if the friend is offline).
+Still need to create this page:
+Expanded long post: When a user clicks expand, show what the expanded post will look like.
