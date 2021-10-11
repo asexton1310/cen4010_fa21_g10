@@ -1,0 +1,24 @@
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-item nav-link" id="home" href="index.php">community</a>
+          </li>
+          <?php
+            if (isset($_SESSION["userName"])){
+              echo "<li class='nav-item'> <a class='nav-item nav-link' id='chat' href='feed.php'>feed</a> </li>";
+              echo "<li class='nav-item'><a class='nav-item nav-link' id='post' href='post.php'>post</a></li>";
+              echo "<li class='nav-item'> <a class='nav-item nav-link' id='chat' href='chat.php'>chat</a> </li>";
+              echo "<li class='nav-item'> <a class='nav-item nav-link' id='profile' href='profile.php'>profile</a> </li>";
+              echo "<li class='nav-item'> <a class='nav-item nav-link' id='profile' href='include/script_logout.php'>logout</a> </li>";
+          }
+          else{
+            echo "<li class='nav-item'><a class='nav-item nav-link' id='post' href='post.php'>post</a></li>";
+            echo "<li class='nav-item'><a class='nav-item nav-link' id='logi' href='login.php'>login</a></li>";
+            echo "<li class='nav-item'><a class='nav-item nav-link' id='register' href='register.php'>register</a></li>";
+          }
+          ?>
+        </ul>
+      </div>
