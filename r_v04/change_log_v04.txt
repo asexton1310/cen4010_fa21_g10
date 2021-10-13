@@ -1,0 +1,30 @@
+
+currently using old layout - not using the layout from Prototype_V_2
+
+new features
+	- form validation and logic implemented for login
+		- missing username
+		- misising password
+		- missing username and password
+		- invalid username
+		- invalid password
+		
+	- form validation and logic implemented for registering new user
+		- missing entries
+		- username already in use
+		- email already in use
+		- password and comfirmation password mismatch
+	
+	- created friendships table in database
+	- created friend_request table in database
+	
+	- updated personal profile to include
+		- friends list
+		- current requests
+		- past requests
+
+new issues
+	- user name isnt being captured on new posts
+	- ability to send multiple friend requests
+	- no list for rejected requests
+	- user profile still displays friends request even if friended

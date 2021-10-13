@@ -1,0 +1,91 @@
+// create table - enter into database sql tab
+create table relay_user (
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	userName varchar(25) not null,
+	passd varchar(25) not null,
+	firstName varchar(25) not null,
+	lastName varchar(25) not null,
+	email varchar(30) not null,
+	bio varchar(1000) DEFAULT NULL,
+	friendsName varchar(25) DEFAULT NULL,
+	friendsLevel int(1) DEFAULT NULL
+)
+
+// create dummy users - enter into table sql tab
+insert into relay_user (userName, passd, firstName, lastName, email) 
+				VALUES ('max', 'password', 'Maxon', 'Corvil', 'mcorvil2018@fau.edu')
+	
+
+insert into relay_user (userName, passd, firstName, lastName, email) 
+				VALUES ('Bael', '123', 'Emily', 'Cohen', 'fake@gmail.com')
+	
+insert into relay_user (userName, passd, firstName, lastName, email) 
+				VALUES ('Mephistopheles', '123', 'Isabella', 'Hoffman', 'anotherFake@gmail.com')
+	
+
+insert into relay_user (userName, passd, firstName, lastName, email) 
+				VALUES ('Incubus', '123', 'David', 'Fiddes', 'moreFakeness@gmail.com')
+	
+
+
+
+// create table - enter into database sql tab
+create table posts (
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	usrName varchar(25) not null,
+	title varchar(128) not null,
+	teaser varchar(128) default null,
+	content varchar(500) not null,
+	postLevel int not null,
+	likes int not null,
+	postDate DATE not null
+)
+
+
+// create dummy post- enter into table sql tab
+insert into posts (usrName, title, content, postLevel, likes, postDate) 
+				VALUES ('Max', 'test post', 'Aliquam vitae nulla eu velit ornare viverra sed ut ipsum. In eleifend ligula rutrum lacinia cursus. Vivamus convallis congue dolor ve.', '0', '20', '2021-10-05')
+
+
+insert into posts (usrName, title, content, postLevel, likes, postDate) 
+				VALUES ('Oni', 'test post', 'Sed feugiat justo eget nunc efficitur consequat. Maecenas finibus neque ipsum, eu posuere mi faucibus ac. Nullam rhoncus eu justo non feugiat.', '0', '20', '2021-10-04')
+				
+
+insert into posts (usrName, title, content, postLevel, likes, postDate) 
+				VALUES ('Bael', 'test post', 'Phasellus ornare felis ut ante rutrum, nec auctor justo viverra. Integer in nunc a magna', '1', '20', '2019-01-01')
+				
+				
+insert into posts (usrName, title, content, postLevel, likes, postDate) 
+				VALUES ('Mephistopheles', 'test post', 'euismod enim ut elit mattis, non lacinia elit venenatis. Morbi quis pharetra', '1', '20', '2019-01-01')
+				
+
+insert into posts (usrName, title, content, postLevel, likes, postDate) 
+				VALUES ('vonderasche', 'test post', 'euismod enim ut elit mattis, non lacinia elit venenatis. Morbi quis pharetra', '1', '20', '2019-01-01')
+				
+				
+insert into posts (usrName, title, content, postLevel, likes, postDate) 
+				VALUES ('Incubus', 'test post', 'Phasellus ornare felis ut ante rutrum, nec auctor justo viverra. Integer in nunc a magna', '0', '20', '2019-01-01')
+				
+				
+
+// create table - enter into database sql tab
+create table friendships(
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	user1 varchar(25) not null,
+	user2 varchar(25) not null,
+	friend_level int not null
+
+)
+
+// create table - enter into database sql tab
+create table friend_request(
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	currentUser varchar(25) not null,
+	friend_reqest_name varchar(25) not null,
+	current_reqest int not null,
+	completed_requests int not null,
+	friend_level int not null
+
+)
+				
+				
