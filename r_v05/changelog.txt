@@ -1,0 +1,20 @@
+
+fixed
+	- user name is displayed/recorded for posts - feature broke in r_v04
+	- redirect to login if trying to view user profile while not logged in
+
+new features
+	- relationship_table replaces friendship and friend_request tables
+	- remove/add/sent request button on user profile
+	- approve/reject friend request on personal profile
+	- remove current friend from friend list
+	- likes function implemented
+	- likes displayed per post
+	- post date is recorded to table
+	- date is displayed on post
+	- posts on community page sorted by date decending
+	
+	
+removed
+	- friend_table - replaced by relationship_table
+	- friend_request table - replaced by relationship_table
