@@ -68,6 +68,19 @@ include_once 'header.php';
               echo "<p>passwords do not match</p>";
             }
 
+            else if($_GET['error'] == "password_missing_lowercase"){
+                echo "<p>password must contain at least one lowercase letter</p>";
+            }
+            else if($_GET['error'] == "password_missing_uppercase"){
+                echo "<p>password must contain at least one uppercase letter</p>";
+            }
+            else if($_GET['error'] == "password_missing_number"){
+                echo "<p>password must contain at least one number</p>";
+            }
+            else if($_GET['error'] == "password_too_short"){
+                echo "<p>password must be at least 8 characters long</p>";
+            }
+
             else if($_GET['error'] == "blank_entries"){
               echo "<p>one or more entries left blank</p>";
             }
@@ -85,7 +98,7 @@ include_once 'header.php';
     </div>
     </div>
     <br>
-    <button type="submit" name = "submit" class="btn btn-dark">Submt</button>
+    <button type="submit" name = "submit" class="btn btn-dark">Submit</button>
     </form>
     <br><br>
     <div class="container footer"><p class="footer">.</p></div>

@@ -37,7 +37,7 @@
       <option value="2">best friends</option>
       </select>
       <br>
-      <button type="postSubmit" name = "postSubmit" class="btn btn-dark">Submt</button>  
+      <button type="postSubmit" name = "postSubmit" class="btn btn-dark">Submit</button>  
       </form>
     
     <br>  

@@ -1,7 +1,11 @@
 
 fixed
 	- must be logged in to like a post
-
+	- added password checks during registration for 1 lowercase letter, 1 uppercase letter, 1 number, at least 8 characters long
+	- adjusted indentation in script_register.php to be uniform across the file
+	- corrected spelling of submit buttons in registration and create post pages
+	- removed post button in header.php when not logged in, preventing users from posting without being logged in
+	- adjusted feed.php to only display friend and best friend posts of the currently logged in user
 
 new features
 	- search feature

@@ -18,6 +18,7 @@
             
             $posterUserName = $row['usrName'];
             $friendName = $row['requestor_name'];
+            $friendName2 = $row['currentUser'];
 
             $relationship_level = $row['relationship_level'];
             $post_level = $row['postLevel'];
@@ -25,7 +26,7 @@
          //   echo "$relationship_level - $post_level <br />";
             //$_SESSION["userName"]
             if($post_level >= 1){
-                if($posterUserName == $friendName && $_SESSION["userName"] != $posterUserName){
+                if(($posterUserName == $friendName || $posterUserName == $friendName2) && $_SESSION["userName"] != $posterUserName && ($_SESSION["userName"] == $friendName || $_SESSION["userName"] == $friendName2)){
                     echo '<div class="container-fluid">';
                     echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
                     echo '<div class="container title"><h3>'; echo '<a href="user_profile.php?usrName='.$row["usrName"].'">'; echo $row["usrName"]; echo '</a>'; echo " // "; echo $row["title"];  echo " // "; echo $row["postDate"]; echo '</h3></div>';

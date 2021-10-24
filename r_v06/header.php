@@ -51,7 +51,6 @@
               echo '</form>';
           }
           else{
-            echo "<li class='nav-item'><a class='nav-item nav-link' id='post' href='post.php'>post</a></li>";
             echo "<li class='nav-item'><a class='nav-item nav-link' id='logi' href='login.php'>login</a></li>";
             echo "<li class='nav-item'><a class='nav-item nav-link' id='register' href='register.php'>register</a></li>";
           }
