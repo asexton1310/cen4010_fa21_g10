@@ -1,0 +1,15 @@
+
+fixed
+	- must be logged in to like a post
+
+
+new features
+	- search feature
+		-user name
+		-first name
+		-last name
+
+	- search results on printed to table
+
+	- feed as been updated to show friend/best friend posts
+
