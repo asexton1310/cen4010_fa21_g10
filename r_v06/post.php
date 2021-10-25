@@ -40,6 +40,19 @@
       <button type="postSubmit" name = "postSubmit" class="btn btn-dark">Submit</button>  
       </form>
     
+      <?php
+        // display post error messages to user
+        if(isset($_GET['error'])){
+            if($_GET['error'] == "title_empty"){
+              echo "<p>post missing a title</p>";
+            }
+
+            else if($_GET['error'] == "content_empty"){
+              echo "<p>post missing content</p>";
+            }
+         }
+      ?>
+
     <br>  
    </div>
     <div class="container footer"><p class="footer">.</p></div>

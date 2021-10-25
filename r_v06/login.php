@@ -7,8 +7,8 @@
     <div class="container title"><h3>login</h3></div>
     <form action = "include/script_login.php" method="post">
         <div class="form-group">
-          <label for="email">Username</label>
-          <input type="text" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" name="userName">
+          <label for="username">Username</label>
+          <input type="text" class="form-control" id="username" aria-describedby="usernameHelp" placeholder="Enter Username" name="userName">
 
         </div>
         <div class="form-group">

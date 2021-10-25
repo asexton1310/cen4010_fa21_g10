@@ -18,20 +18,32 @@ if(isset($_POST["postSubmit"])){
         $postLevel = $_POST["postLevel"];
         $date = date("Y-m-d");
 
-
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
+        if (empty($title)) {
+            header("location: ../post.php?error=title_empty");
+            exit();
         }
-      
-        $sql = "INSERT INTO posts (usrName, title, content, postLevel, postDate)
-            VALUES ('$userName', '$title', '$content', '$postLevel', '$date')";
-      
 
-        if ($conn->query($sql) === TRUE) {
-           header("location: ../index.php");
-         } 
+        else if (empty($content)) {
+            header("location: ../post.php?error=content_empty");
+            exit();
+        }
+
         else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+
+            if ($conn->connect_error) {
+                die("Connection failed: " . $conn->connect_error);
+            }
+        
+            $sql = "INSERT INTO posts (usrName, title, content, postLevel, postDate)
+                VALUES ('$userName', '$title', '$content', '$postLevel', '$date')";
+        
+
+            if ($conn->query($sql) === TRUE) {
+            header("location: ../index.php");
+            } 
+            else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            }
         }
       
       $conn->close();
