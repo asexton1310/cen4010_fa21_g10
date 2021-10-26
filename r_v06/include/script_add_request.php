@@ -28,10 +28,10 @@ if (isset($_SESSION["userName"])){
         if ($resultRelationship = $conn->query($queryRelationship)) {
           // loop thru each row of table
           while ($rowRelationship = $resultRelationship->fetch_assoc()) {
-            if($currentUser ==$rowRelationship["currentUser"] && $usrName == $rowRelationship["requestor_name"] &&  $rowRelationship["relationship_level"] == 1){
+            if($currentUser ==$rowRelationship["currentUser"] && $requestor_name == $rowRelationship["requestor_name"] &&  $rowRelationship["relationship_level"] == 1){
               $isCurrentFriend = true;
             }
-            else if($currentUser ==$rowRelationship["currentUser"] && $usrName == $rowRelationship["requestor_name"] &&  $rowRelationship["relationship_level"] == 1){
+            else if($currentUser ==$rowRelationship["currentUser"] && $requestor_name == $rowRelationship["requestor_name"] &&  $rowRelationship["relationship_level"] == 1){
               $isCurrentFriend = true;
             }
           }
@@ -41,7 +41,9 @@ if (isset($_SESSION["userName"])){
     if($isCurrentFriend != true){
           $sql = "INSERT INTO relationship_table (currentUser, requestor_name)
                     VALUES ('$currentUser', '$requestor_name')";
-              
+          $sql = "INSERT INTO relationship_table (requestor_name, currentUser)
+                    VALUES ('$requestor_name', '$currentUser')";
+        
         
                 if ($conn->query($sql) === TRUE) {
                   header("location: ../index.php");
