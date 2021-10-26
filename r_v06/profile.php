@@ -74,8 +74,23 @@
                 echo '</tr>';
               $friends_row_num = $friends_row_num+1;
               }
+              else if($_SESSION["userName"] == $row["requestor_name"]){
+                echo '<tr>';
+                echo '<th scope="row">' .$friends_row_num.' </th>';
+                echo '<td><a href="user_profile.php?usrName=' .$row["currentUser"].'"> '.$row["currentUser"]. '</a></td>';
+                if($row["relationship_level"] == 2) {
+                    echo '<td> Best Friend </td>';
+                }
+                else {
+                    echo '<td> Friend </td>';
+                }
+                //echo '<td> '.$row["relationship_level"]. ' </td>';
+                echo '<td><a href="include/script_approve_requests.php?currentUser=' .$row["currentUser"].'&level=3&row=' .$row["id"].'"> remove</a></td>';
+                echo '</tr>';
+              $friends_row_num = $friends_row_num+1;
+              }
             }
-
+            
            }
         }
       }   
