@@ -13,93 +13,90 @@
     $currentUser = $_SESSION["userName"];
 
     // check friendship status
-    $isCurrentFriend = 0;
+    $isCurrentFriend = false;
+    // check if friend request is pending
+    $isRequestPending = false;
+    $haveReceivedRequest = false;
     
-    $queryRelationship = "SELECT * FROM relationship_table";
+    $queryRelationship = "SELECT * FROM relationship_table WHERE currentUser='$currentUser'";
     // if results
     if ($resultRelationship = $conn->query($queryRelationship)) {
       // loop thru each row of table
       while ($rowRelationship = $resultRelationship->fetch_assoc()) {
-        if($currentUser ==$rowRelationship["currentUser"] && $usrName == $rowRelationship["requestor_name"] &&  $rowRelationship["relationship_level"] == 1){
-          $isCurrentFriend = 1;
+        if($usrName == $rowRelationship["otherUser"] &&  $rowRelationship["relationship_level"] >= 1){
+          $isCurrentFriend = true;
         }
-        else if($currentUser ==$rowRelationship["currentUser"] && $usrName == $rowRelationship["requestor_name"] &&  $rowRelationship["request_status"] == 0){
-          $isCurrentFriend = 2;
+        else if($usrName == $rowRelationship["otherUser"] &&  $rowRelationship["request_status"] == 0){
+            $isRequestPending = true;
+        }
+        else if($usrName == $rowRelationship["otherUser"] &&  $rowRelationship["request_status"] == -1){
+            $haveReceivedRequest = true;
         }
       }
     }
 
-    $query = "SELECT * FROM relay_user";
+    $query = "SELECT * FROM relay_user WHERE username='$usrName'";
     
     // if results
-    if ($result = $conn->query($query)) {
-        // loop thru each row of table
-        while ($row = $result->fetch_assoc()) {
-          if($usrName ==$row["userName"] ){
-           echo '<div class="container-fluid">';
-           echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
-           echo '<div class="container title"><h3>user profile</h3></div>';  
+    if ($result = $conn->query($query)) { 
+        $row = $result->fetch_assoc();    
+        echo '<div class="container-fluid">';
+        echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
+        echo '<div class="container title"><h3>user profile</h3></div>';  
 
-           echo '<div class="container content">';
-           echo '<p class="main">User Name: ' . $row["userName"] . '</p>'; 
-           echo '<p class="main">First Name: ' . $row["firstName"] . '</p>'; 
-           echo '<p class="main">Last Name: ' . $row["lastName"] . '</p>'; ;
-           echo '<p class="main">Bio: ' . $row["bio"] . '</p>'; 
-           echo '<br>  ';
-           echo '</div>';
-           echo '<div class="container content">';
-           if($isCurrentFriend == 0){
-             echo '<a href="include/script_add_request.php?requestor_name='.$row["userName"].'">'; echo " request friendship"; echo '</a>';
-           }
-           else if($isCurrentFriend == 1){
-            echo '<a href="include/script_add_request.php?requestor_name='.$row["userName"].'">'; echo " remove friend"; echo '</a>';
-       
-           }
-           else if($isCurrentFriend == 2){
-            echo " request sent";
-           }
-           echo '</div>';
-           echo '<div class="container footer"><p class="footer">.</p></div>';
-           echo '</div>';
-          }
+        echo '<div class="container content">';
+        echo '<p class="main">User Name: ' . $row["userName"] . '</p>'; 
+        echo '<p class="main">First Name: ' . $row["firstName"] . '</p>'; 
+        echo '<p class="main">Last Name: ' . $row["lastName"] . '</p>'; ;
+        echo '<p class="main">Bio: ' . $row["bio"] . '</p>'; 
+        echo '<br>  ';
+        echo '</div>';
+        echo '<div class="container content">';
+        if($isCurrentFriend == false && $isRequestPending == false && $haveReceivedRequest == false){
+            echo '<a href="include/script_add_request.php?otherUser='.$row["userName"].'">'; echo " request friendship"; echo '</a>';
         }
-      }
+        else if($isCurrentFriend){
+            echo '<a href="include/script_remove_friend.php?otherUser='.$row["userName"].'">'; echo " remove friend"; echo '</a>';
+        }
+        else if($isRequestPending){
+            echo " request sent";
+        }
+        else if($haveReceivedRequest){
+            echo " user has sent you a friend request, ";
+            echo '<a href="profile.php">'; echo " go to your profile"; echo '</a>';
+        }
+        echo '</div>';
+        echo '<div class="container footer"><p class="footer">.</p></div>';
+        echo '</div>';
+    }
   
-  
-      $query = "SELECT * FROM posts";
 
-      if ($result = $conn->query($query)) {
-      
-          while ($row = $result->fetch_assoc()) {
-            
-            $post_level = $row['postLevel'];
+    $query = "SELECT * FROM posts WHERE usrname='$usrName' AND postLevel=0";
 
-            if($post_level == 0){
-                if($usrName == $row["usrName"]){
-                    echo '<div class="container-fluid">';
-                    echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
-                    echo '<div class="container title"><h3>'; echo $row["usrName"]; echo " // "; echo $row["title"];  echo " // "; echo $row["postDate"]; echo '</h3></div>';
-                    echo '<div class="container content">';
-                    echo $row["content"]; 
-                    echo '<br>';
-                    echo '<br>';
-                    echo '</div>';
-                    echo '<div class="container footer"><p class="footer">.</p></div>';
-                    echo '</div>';
-                    echo '</div>';          
-                }
-            }
-          }
-      }
+    if ($result = $conn->query($query)) {
+        while ($row = $result->fetch_assoc()) {
+            echo '<div class="container-fluid">';
+            echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
+            echo '<div class="container title"><h3>'; echo $row["usrName"]; echo " // "; echo $row["title"];  echo " // "; echo $row["postDate"]; echo '</h3></div>';
+            echo '<div class="container content">';
+            echo $row["content"]; 
+            echo '<br>';
+            echo '<br>';
+            echo '</div>';
+            echo '<div class="container footer"><p class="footer">.</p></div>';
+            echo '</div>';
+            echo '</div>';          
+        }
+    }
 
-      $query = "SELECT posts.usrName, posts.title, posts.content, posts.postLevel, posts.postDate, posts.id, posts.likes, relationship_table.requestor_name, relationship_table.currentUser, relationship_table.relationship_level  from posts, relationship_table where posts.postLevel = relationship_table.relationship_level";
+      $query = "SELECT posts.usrName, posts.title, posts.content, posts.postLevel, posts.postDate, posts.id, posts.likes, relationship_table.otherUser, relationship_table.currentUser, relationship_table.relationship_level  from posts, relationship_table where posts.postLevel = relationship_table.relationship_level";
 
       if ($result = $conn->query($query)) {
     
         while ($row = $result->fetch_assoc()) {
             
             $posterUserName = $row['usrName'];
-            $friendName = $row['requestor_name'];
+            $friendName = $row['otherUser'];
             $friendName2 = $row['currentUser'];
 
             $relationship_level = $row['relationship_level'];
@@ -123,7 +120,7 @@
                 }
             }
         }
-    }      
+    }  
   
   
   

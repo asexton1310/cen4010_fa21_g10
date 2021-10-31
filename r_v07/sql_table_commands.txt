@@ -29,7 +29,7 @@ create table posts (
 create table relationship_table(
 	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
 	currentUser varchar(25) not null,
-	requestor_name varchar(25) not null,
+	otherUser varchar(25) not null,
 	request_status int not null,
 	relationship_level int not null
 )
