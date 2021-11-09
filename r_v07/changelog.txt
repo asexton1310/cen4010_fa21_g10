@@ -1,77 +1,48 @@
-user_profile.php
-  -- changed the friendship status variable from an integer containing 0, 1, or 2, magic numbers, 
-	to boolean for true/false (corresponding to old levels 0, 1)
-	added second variable to track if a friend request is pending (corresponding to old level 2)
+chat.php
+	-- displays friends, placeholders for showing online/offline status and sending chatroom invites
+	-- clicking the placeholder send invite button redirects to chatroom.php
+	-- displays received chatroom invites, buttons to accept and reject invites
 
-  -- added another variable to track if this user sent the currently logged in user a friend request (request_status of -1, detailed in script_add_request.php below)
-	if so, the currently logged in user is informed and able to click another link to redirect them to their profile
-	
-  --adjusted "SELECT * FROM relay_user" query and results parsing to use WHERE username='usrname'clause, 
-	this avoids retrieving the entire user table by selecting only the target user, and removes the while loop
+chatroom.php
+	-- implements the chatroom framework
+	-- redirects users back to chat.php when they click the exit chatroom button
+	-- checks that users specified a roomid, redirects if they did not
+	-- does not check if they are an actual participant in the chatroom yet
 
-  --adjusted "SELECT * FROM posts" to use WHERE usrname='$usrname'
-	this avoids retrieving the entire posts table by selecting only the target author, and removes the later author check
-  
-  --did not adjust, but still want to adjust, the "SELECT posts.usrName, posts.title,..." query that retrieves
-	friend-level posts if appropriate, but I do not see an immediate elegant solution, so I have postponed it
+chat.js
+	-- adds click event handlers to invite user, accept invite, reject invite buttons
+	-- sending an invite first creates a chatroom to get a roomid
+		-- in its callback, it sends a post request to script_chatinvite.php that updates the database with the invite
+		-- callback also sends a post request to script_chatroom.php that adds the sender to the newly created chatroom, where they will wait alone until the recipient joins
+	-- accepting an invite sends a post request to script_chatinvite.php that deletes the original invite from the database and updates the chatroom to show that it is active
+	-- accepting an invite also sends a post request to script_chatroom.php that adds this user to the chatroom
+	-- rejecting an invite sends a post request to script_chatinvite.php that deletes the original invite from the database
 
-  -- replaced all calls to script_approve_requests.php with level of 3 (corresponding to 'deleting' a friend) with calls to script_remove_friend.php
+chatroom.js
+	-- adds click event handlers to the exit chatroom and send message buttons
+	-- exit chatroom function is handled inside chatroom.php
+	-- send message button posts the roomid and entered message to script_postchat.php
+	-- also gets the messages from DB for the current room every 2500ms by sending get request to script_getchat.php
+		-- inserts the returned html from script_getchat.php into a holder in chatroom.php's 
 
-profile.php
-  -- adjusted "SELECT * FROM relay_user" query to use WHERE userName='$currentUser',
-	this avoids retrieving the entire user table by selecting only the currently logged in user, and removes the while loop
-  
-  -- adjusted friends list "SELECT * FROM relationship_table" query to use WHERE currentUser='$currentUser',
-	this only selects the currentUser's friends from the relationship table, and removes the currentUser check later,
-	also removed the section of code displaying the other friend if the currently logged in user was in the requestor_name,
-	(now otherUser) column of the relationship_table entry, since the overhaul makes this erroneous
-  -- adjusted current friend request "SELECT * FROM relationship_table" 
-	query to use WHERE otherUser='$currentUser' AND request_status=0 clause,
-	this avoids retrieving the friendship table by only selecting friend requests where the currently logged in user is the recipient (otherUser),
-	and removes later check for this condition
+script_postchat.php
+	-- similar to script_post.php, adds an entry to the chatroom_messages table containing
+		-- the user's entered message
+		-- the user's userName
+		-- the roomid the user is in
+		-- an automatically generated timestamp for the message
 
-  -- adjusted sent request "SELECT * FROM relationship_table" query to use WHERE currentUser='$currentUser' AND request_status=0 clause,
-	this avoids retrieving the friendship table by only selecting friend requests where the currently logged in user is the sender (currentUser),
-	and removes later check for this condition
-	
-  -- adjusted personal posts "SELECT * FROM posts" query to use WHERE usrName='$currentUser', 
-	this avoids retrieving the entire posts table by selecting only ones authored by the currently logged in user, and removes the later author check
+script_getchat.php
+	-- gets all messages for the roomid passed as part of the get request, formats them in HTML and returns this html
 
-  -- replaced all calls to script_approve_requests.php with level of 3 (corresponding to 'deleting' a friend) with calls to script_remove_friend.php
+script_chatinvite.php
+	-- has 3 modes, invite, reject, accept, one of which must be specified in all requests
+	-- invite mode inserts into chatroom_requests a chatroom request specifiying the recipient, requestor, and room_id
+	-- reject mode deletes from chatroom_requests requests specified by the recipient and requestor
+	-- reject mode deletes from chatroom_requests requests specified by the recipient and requestor, as well as updates chatrooms given a specified room_id
 
+script_chatroom.php
+	-- has 2 modes, create and adduser
+	-- create mode creates a new chatroom with status of 0 and returns the automatically created room_id in the response as a json encoding
+	-- adduser mode inserts the currently active user into chatroom_participants given a room_id
 
-feed.php
-  -- adjusted the "SELECT ... FROM posts, relationship_table" query to use a nested query with an alias,
-	this nested query returns the current user's friends and the friends' relationship settings for the current user
-
-  -- adjusted the "SELECT ... FROM posts, relationship_table" query's WHERE clause to also check that each post's author is a friend of the currently logged in user
-
-  -- removed the complex if statement that since the 2 above WHERE clause changes replaced it
-
-
-script_add_request.php
-  -- adjusted query that checks friendship status to use WHERE clause, avoiding retrieving the entire table
-
-  -- combined the second INSERT INTO sql statement that was overwriting the first one and reversing the currentUser and otherUser (formerly requestor_name) fields into a single sql statement
-	this statement adds a pending friend request with request_status of 0, and a placeholder request with request_status of -1,
-	this placeholder keeps both users next to each other in the relationship_table so that both entries for this friendship are
-	next to each other in relationship_table
-
-
-script_approve_requests.php
-  -- changed to get currentUser and otherUser from url calling this function rather than currentUser from the currently active session
-	since the user approving the friend request will be the recipient (otherUser). this keeps usage of currentUser and otherUser inside script_approve_request.php consistent with the actual relationship_table
-	this change puts the responsibility on the caller to supply the proper currentUser and otherUser
-
-  -- combined the two "UPDATE relationship_table" sql statements that modified request_status and relation_level of a single entry
-
-  -- added another "UPDATE relationship_table" sql statement that modifies the second entry between these two users that had a request_status of -1 to ensure both users are considered friends of the other when the recipient approves
-
-script_remove_friend.php
-  --created. This script deletes a friendship between the currently logged in user and another user. 
-
-  -- To use: This script should be supplied a parameter containing another user's username, this script will delete from relationship_table any entries where currentUser is the currently logged in user and otherUser is the passed parameter, and any entries where currentUser is ther passed parameter and otherUser is the currently logged in user
-
-sql_table_commands.txt
-  -- renamed requestor_name to otherName inside create table relationship_table() 
- 

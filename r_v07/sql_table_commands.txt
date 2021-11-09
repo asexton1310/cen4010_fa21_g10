@@ -16,8 +16,8 @@ create table relay_user (
 create table posts (
 	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
 	usrName varchar(25) not null,
-	title varchar(128) not null,
-	teaser varchar(128) default null,
+	title varchar(200) not null,
+	teaser varchar(200) default null,
 	content varchar(500) not null,
 	postLevel int not null,
 	likes int not null,
@@ -34,7 +34,36 @@ create table relationship_table(
 	relationship_level int not null
 )
 
+// create chatroom messages table - enter into database sql tab
+create table chatroom_messages(
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	room_id int(11) not null,
+	userId varchar(25) not null,
+	content varchar(500) not null,
+	date DATE not null default current_timestamp()
+)
 
+// create chatrooms table - enter into database sql tab
+create table chatrooms(
+	room_id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	status int(11) not null default 0
+)
+
+// create chatroom participants table - enter into database sql tab
+create table chatroom_participants(
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	room_id int(11) not null,
+	userId varchar(25) not null,
+	status int(11) not null default 0
+)
+
+// create chatroom requests table
+create table chatroom_requests(
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	req_name varchar(25) not null,
+	rec_name varchar(25) not null,
+	room_id int(11) not null
+)
 
 
 
