@@ -1,0 +1,13 @@
+// UPDATED POSTS TABLE TO INCLUDE IMAGES
+create table posts (
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	usrName varchar(25) not null,
+	title varchar(128) not null,
+	teaser varchar(200) default null,
+	content varchar(500) not null,
+	image LONGBLOB,
+	postLevel int not null,
+	likes int not null,
+	postDate DATE not null
+)
+

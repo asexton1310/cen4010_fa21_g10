@@ -1,0 +1,21 @@
+the only change to the database is the posts table
+
+changes to site
+------------
+display images updated to
+-> post.php
+-> feed.php
+-> index.php
+-> user_profile.php 
+-> profile.php
+
+-allowed image formats include .jpg, .jpeg, or .png
+
+-updated -index.php only- to order posts descending by id (instead of date) so 
+the newest post appears at the top (adjust date to include time in db?)
+
+-user is able to search for posts
+-user can filter search by user or post
+-user must input text to use search feature
+
+
