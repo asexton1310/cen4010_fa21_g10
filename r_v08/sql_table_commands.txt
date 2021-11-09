@@ -19,11 +19,11 @@ create table posts (
 	title varchar(200) not null,
 	teaser varchar(200) default null,
 	content varchar(500) not null,
+	image LONGBLOB,
 	postLevel int not null,
-	likes int not null,
+	likes int not null default 0,
 	postDate DATE not null
 )
-
 
 // create friendships table - enter into database sql tab
 create table relationship_table(
