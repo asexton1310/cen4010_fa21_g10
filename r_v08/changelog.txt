@@ -1,24 +1,31 @@
-the only change to the database is the posts table
+chatroom.php
+	-- checks that a user is a participant of the specified chatroom, if they are not, then they are redirected back to chats.php
+	-- only contains a placeholder div, and a list of currently online friends until another user has joined the chatroom
+	-- users can invite additional friends to the chatroom
 
-changes to site
-------------
-display images updated to
--> post.php
--> feed.php
--> index.php
--> user_profile.php 
--> profile.php
+header.php
+	-- sends a query that updates the user's lastonline timestamp in online_users table every time they change pages
 
--allowed image formats include .jpg, .jpeg, or .png
+script_chatroom.php
+	-- added removeuser, getparticipants, and closeroom modes that will be called by chatroom.js
+	-- removeuser simply deletes the user from this chatroom in chatroom_participants
+	-- getparticipants returns a count of the total number of users in this chatroom
+	-- closeroom deletes all participants from this chatroom and updates its status to show that it is close
 
--updated -index.php only- to order posts descending by id (instead of date) so 
-the newest post appears at the top (adjust date to include time in db?)
+script_getroomstatus.php
+	-- queries chatrooms table and returns both the room's status, and html to display in chatroom.php based on the room's status
 
--user is able to search for posts
--user can filter search by user or post
--user must input text to use search feature
+script_login.php
+	-- now also inserts into an entry for this user into online_users table
 
--added edit button to profile.php, redirects users to edit.php
-where they can edit their bio and update it to the database
+script_logout.php
+	-- removes the user from online_users table
+
+chatroom.js
+	-- when chatroom.php loads, this sends a request to getroomstatus.php
+	-- assigns a click handler to invite other users regardless of room status
+	-- if the room was just created and nobody has joined yet, an interval is set to periodically check the room's status
+	-- if the room status becomes 1 when another user joins, then click handlers are assigned to the send message and exit chatroom buttons, an interval is also added that periodically gets the number of participants in the chatroom and closes the room if there are less than 2 participants
+	
 
 

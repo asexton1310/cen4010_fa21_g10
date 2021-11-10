@@ -21,7 +21,7 @@
                     VALUES ('$userName', '$otherUser', '$roomid')";
     
             if ($conn->query($sql) === TRUE) {
-                header("location: ../chat.php");
+                echo "request success";
             }
             else {
                 echo "Error: " . $sql . "<br>" . $conn->error;

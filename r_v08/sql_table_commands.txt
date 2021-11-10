@@ -65,6 +65,18 @@ create table chatroom_requests(
 	room_id int(11) not null
 )
 
+// create online users table
+create table online_users(
+	userName varchar(25) not null PRIMARY KEY,
+	lastonline timestamp not null default CURRENT_TIMESTAMP
+)
+
+// create a recurring event that deletes all session older than 10 minutes every 10 minutes
+CREATE DEFINER=`root`@`localhost` EVENT `delete_expired_sessions` 
+	ON SCHEDULE EVERY 10 MINUTE STARTS '2021-11-09 17:40:00' 
+	ON COMPLETION PRESERVE ENABLE 
+	DO 
+	DELETE FROM online_users WHERE lastonline < CURRENT_TIMESTAMP - INTERVAL 10 MINUTE
 
 
 

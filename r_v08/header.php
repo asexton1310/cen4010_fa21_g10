@@ -42,6 +42,9 @@
           </li>
           
           <?php
+            require_once 'include/script_db_connection.php';
+            require_once 'include/script_functions.php';
+            
             if (isset($_SESSION["userName"])){
               echo "<li class='nav-item'> <a class='nav-item nav-link' id='chat' href='feed.php'>feed</a> </li>";
               echo "<li class='nav-item'><a class='nav-item nav-link' id='post' href='post.php'>post</a></li>";
@@ -56,6 +59,21 @@
               echo '<input type="text" placeholder="Search" name="search" type="search" required>';
               echo '<button type="submit" name="submit">Submit</button>';
               echo '</form>';
+            
+              $userName = $_SESSION["userName"];
+              $query = "UPDATE online_users SET lastonline = CURRENT_TIMESTAMP WHERE userName = '$userName'";
+
+              if ($result = $conn->query($query)) {
+                  echo "updated online_users";
+              }
+              else {
+                $query = "INSERT INTO online_users (userName)
+                          VALUES ('$userName')";
+
+                if ($result = $conn->query($query)) {
+                    echo "inserted online_users";
+                }
+              }
             }
           else{
             echo "<li class='nav-item'><a class='nav-item nav-link' id='logi' href='login.php'>login</a></li>";
