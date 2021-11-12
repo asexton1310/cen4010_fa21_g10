@@ -1,0 +1,79 @@
+// create users table - enter into database sql tab
+create table relay_user (
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	userName varchar(25) not null,
+	passd varchar(25) not null,
+	firstName varchar(25) not null,
+	lastName varchar(25) not null,
+	email varchar(30) not null,
+	`code` mediumint(50) DEFAULT NULL,
+  `status` text DEFAULT NULL,
+	bio varchar(1000) DEFAULT NULL,
+	friendsName varchar(25) DEFAULT NULL,
+	friendsLevel int(1) DEFAULT NULL
+)
+
+
+// create posts table - enter into database sql tab
+create table posts (
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	usrName varchar(25) not null,
+	title varchar(200) not null,
+	teaser varchar(200) default null,
+	content varchar(500) not null,
+	image LONGBLOB,
+	postLevel int not null,
+	likes int not null default 0,
+	postDate DATE not null
+)
+
+// create friendships table - enter into database sql tab
+create table relationship_table(
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	currentUser varchar(25) not null,
+	otherUser varchar(25) not null,
+	request_status int not null,
+	relationship_level int not null
+)
+
+// create chatroom messages table - enter into database sql tab
+create table chatroom_messages(
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	room_id int(11) not null,
+	userId varchar(25) not null,
+	content varchar(500) not null,
+	date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+)
+
+// create chatrooms table - enter into database sql tab
+create table chatrooms(
+	room_id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	status int(11) not null default 0
+)
+
+// create chatroom participants table - enter into database sql tab
+create table chatroom_participants(
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	room_id int(11) not null,
+	userId varchar(25) not null,
+	status int(11) not null default 0
+)
+
+// create chatroom requests table
+create table chatroom_requests(
+	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
+	req_name varchar(25) not null,
+	rec_name varchar(25) not null,
+	room_id int(11) not null
+)
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,36 @@
+the only change to the database is the posts table
+
+changes to site
+------------
+display images updated to
+-> post.php
+-> feed.php
+-> index.php
+-> user_profile.php 
+-> profile.php
+-> user_profile.php
+-> user-otp.php one time passwords
+->
+
+-allowed image formats include .jpg, .jpeg, or .png
+
+-updated -index.php only- to order posts descending by id (instead of date) so 
+the newest post appears at the top (adjust date to include time in db?)
+
+-user is able to search for posts
+-user can filter search by user or post
+-user must input text to use search feature
+
+-added edit button to profile.php, redirects users to edit.php
+where they can edit their bio and update it to the database
+
+--todo
+consider delete post
+consider seperating posts friends and personal posts
+unlike functionality 
+comment and shares
+-- optional
+add post preview- frontend
+open post image- fromtend
+
+
