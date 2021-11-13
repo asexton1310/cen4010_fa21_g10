@@ -3,6 +3,26 @@
 ?>
 
 
+<?php
+    // this section updates timestamps to track that the current user is online
+    require_once 'include/script_db_connection.php';
+    require_once 'include/script_functions.php';
+    
+    $userName = $_SESSION["userName"];
+    $query = "UPDATE online_users SET lastonline = CURRENT_TIMESTAMP WHERE userName = '$userName'";
+
+    if ($result = $conn->query($query)) {
+        //echo "updated online_users";
+    }
+    else {
+        $query = "INSERT INTO online_users (userName)
+                    VALUES ('$userName')";
+
+        if ($result = $conn->query($query)) {
+            echo "inserted online_users";
+        }
+    }
+?>
 
 
 

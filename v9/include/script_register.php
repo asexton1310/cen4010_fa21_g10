@@ -37,7 +37,7 @@ if(isset($_POST["submit"])){
     $emailMatch = false;
     $unmatched_passwords = false;
     $password_missing_lowercase = false;
-    $password_missing_upperrcase = false;
+    $password_missing_uppercase = false;
     $password_missing_number = false;
     $password_too_short = false;
     $names_contain_non_letters = false;

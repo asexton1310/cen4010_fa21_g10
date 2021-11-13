@@ -67,7 +67,16 @@ if(isset($_POST["login"])){
     if($userMatch == true){
         session_start();
         $_SESSION["userName"] = $userName;
-        header("location: ../index.php");
+        //track that the user is now online
+        $query = "INSERT INTO online_users (userName)
+                  VALUES ('$userName')";
+
+        if ($result = $conn->query($query)) {
+            header("location: ../index.php");
+        }
+        else {
+            header("location: ../index.php?error=activityfail");
+        }
         exit();
     }
 

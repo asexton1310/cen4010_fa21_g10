@@ -34,5 +34,43 @@
                 echo "Error: " . $sql . "<br>" . $conn->error;
             } 
         }          
+        else if ($mode === "removeuser") {
+            $roomid = $_POST['room'];
+
+            $sql = "DELETE FROM chatroom_participants WHERE (room_id='$roomid' AND userId='$userName')";
+        
+            if ($conn->query($sql) === TRUE) {
+                header("location: ../chat.php");
+            }
+            else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            } 
+        }
+        else if ($mode === "getparticipants") {
+            $roomid = $_POST['room'];
+
+            $query = "SELECT COUNT(DISTINCT userId) as total FROM chatroom_participants
+                      WHERE room_id = $roomid"; //count needs an alias for fetch_assoc to work 
+        
+            if ($result = $conn->query($query)) {
+                echo $result->fetch_assoc()['total'];
+            }
+            else {
+                echo "Error: " . $query . "<br>" . $conn->error;
+            }
+        }
+        else if ($mode === "closeroom") {
+            $roomid = $_POST['room'];
+
+            $sql = "DELETE FROM chatroom_participants WHERE (room_id='$roomid');"; //delete everyone in the chatroom
+            $sql .= "UPDATE chatrooms SET status = -1 WHERE room_id = $roomid";  //set status to -1
+        
+            if ($conn->multi_query($sql) === TRUE) {
+                header("location: ../chat.php");
+            }
+            else {
+                echo "Error: " . $sql . "<br>" . $conn->error;
+            } 
+        }
     }    
 ?>

@@ -8,47 +8,76 @@
 ?>
 
 <?php
-    if(isset($_GET['exit'])){	 
-        //Simple exit message
-        //$logout_message = "<div class='msgln'><span class='left-info'>User <b class='user-name-left'>". $_SESSION['userName'] ."</b> has left the chat session.</span><br></div>";
-        //file_put_contents("log.html", $logout_message, FILE_APPEND | LOCK_EX);
-        
-        //session_destroy(); //destroys everything, not just the chat login
-        header("Location: chat.php"); //Redirect the user
-    }
     if(!isset($_GET['room'])){	 
-        //Simple exit message
+        //user did not specify a room, kick them
         header("Location: chat.php"); //Redirect the user
     }
-    else(
+    else{
         // check chatroom_participants table for this roomid and this username, if not there, redirect away
-        $roomid = $_GET['room']
-    )
+        $roomid = $_GET['room'];
+        $userName = $_SESSION["userName"];
+
+        //this participation check prevents the room closed message from appearing, not too bad, but probably worth changing
+        $query = "SELECT * FROM chatroom_participants
+                  WHERE room_id = $roomid AND userId = '$userName'";
+    
+        if ($result = $conn->query($query)) {
+            if ($row = $result->fetch_assoc()) {
+                echo '<div class="container-fluid" id="holdseverything">';
+                echo '</div>';
+
+                // display online friends list
+                echo '<div class="container-fluid">';
+                echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
+                echo '<div class="container title"><h3>friends </h3></div>';
+                // create a table with current friends
+                echo '<table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>';
+                $query = "SELECT relationship_table.otherUser, relationship_table.relationship_level FROM relationship_table, online_users
+                          WHERE (relationship_table.currentUser='$userName' AND relationship_table.otherUser = online_users.userName AND relationship_table.otherUser NOT IN (
+                            SELECT userId FROM chatroom_participants WHERE room_id = $roomid)
+                          )";
+                $friends_row_num = 1;
+                if ($result = $conn->query($query)) {
+                    while ($row = $result->fetch_assoc()) {
+                        if($row["relationship_level"] == 1 || $row["relationship_level"] == 2){
+                            echo '<tr>';
+                            echo '<th scope="row">' .$friends_row_num.' </th>';
+                            echo '<td>'.$row["otherUser"]. '</td>';                      
+                            echo '<td>Online</td>';
+                            echo '<td><button name="recname" value="'.$row["otherUser"].'" type="submit" class="btn btn-dark chatinvite">Send Chat Request</button></td>';
+                            echo '</tr>';
+                            $friends_row_num = $friends_row_num+1;
+                        }
+                    }
+                }
+
+                echo '</tbody>';
+                echo '</table>';
+                echo '</div>';
+                //end friends list section
+
+                echo '<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>';
+                echo '<script type="text/javascript" src="js/chatroom.js"></script>';
+            }
+            else {
+                echo "You're not supposed to be in this chatroom >:(";
+                header("Location: chat.php"); //Redirect the user
+            }
+        }
+        else {
+            echo "Error with query : " . $conn->error;
+        }
+    }
 ?>
-
-<div class="container-fluid">
-    <div class="container-sm posts shadow p-3 mb-5 bg-white rounded">
-        <div class="container title">
-            <h3>Chat. Welcome, <b><?php echo $_SESSION['userName']; ?></b></h3>
-            <p class="logout"><a id="exit" href="#">Exit Chatroom</a></p>
-        </div>
-
-        <div class="container content">
-            <p class="main" id="chatbox"></p>
-            <br>  
-        </div>
-
-        <div class="container footer">
-            <form name="message" action="">
-                <input name="userMsg" type="text" id="userMsg" placeholder="Type here to chat." />
-                <button name="userSubmit" type="submit" id="userSubmit" class="btn btn-dark">Send</button>
-            </form>
-        </div>
-    </div>
-</div>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/chatroom.js"></script>
 
 <?php
   include_once 'footer.php';
