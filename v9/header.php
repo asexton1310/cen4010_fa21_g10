@@ -13,15 +13,20 @@
         $query = "UPDATE online_users SET lastonline = CURRENT_TIMESTAMP WHERE userName = '$userName'";
 
         if ($result = $conn->query($query)) {
-            //echo "updated online_users";
+            if ($conn->affected_rows == 0) {
+                $query = "INSERT INTO online_users (userName)
+                          VALUES ('$userName')";
+
+                if ($result = $conn->query($query)) {
+                    //echo "inserted online_users";
+                }
+            }
+            else {
+                //echo "updated online_users";
+            }
         }
         else {
-            $query = "INSERT INTO online_users (userName)
-                        VALUES ('$userName')";
-
-            if ($result = $conn->query($query)) {
-                echo "inserted online_users";
-            }
+            echo "query failed: " . $result->error;
         }
     }
 ?>
