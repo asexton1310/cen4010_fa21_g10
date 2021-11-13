@@ -13,7 +13,7 @@
 
     
 
-    $search_value=$_POST["search"];
+    $search_value = sanitizeString($_POST["search"]);
 
     if($conn->connect_error){
         echo 'Connection Faild: '.$conn->connect_error;

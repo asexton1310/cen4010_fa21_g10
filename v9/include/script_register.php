@@ -26,6 +26,8 @@ if(isset($_POST['check'])){
 
 if(isset($_POST["submit"])){
     
+    //note that these are sanitized later, that way any encoded characters are checked 
+    //for validity before encoding, but encoded before entering into the database to avoid errors
     $name = $_POST["userName"];
     $passd = $_POST["passd"];
     $passd2= $_POST["passd2"];
@@ -160,6 +162,15 @@ if(isset($_POST["submit"])){
 
         $code = rand(999999, 111111);
         $status = "notverified";
+
+        //note that these are sanitized here instead of earlier, that way any encoded characters are checked 
+        //for validity before encoding, but encoded before entering into the database to avoid errors
+        $name = sanitizeString($name);
+        $passd = sanitizeString($passd);
+        $firstName = sanitizeString($firstName);
+        $lastName = sanitizeString($lastName);
+        $email = sanitizeString($email);
+
         $sql = "INSERT INTO relay_user (userName, passd, firstName, lastName, email, code, status)
         VALUES ('$name', '$passd', '$firstName', '$lastName', '$email', '$code', '$status')";
 

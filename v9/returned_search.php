@@ -7,7 +7,7 @@
     require_once 'include/script_db_connection.php';
     require_once 'include/script_functions.php';
 
-    $search_value=$_POST["search"];
+    $search_value=sanitizeString($_POST["search"]);
     $current_reqest_row_num = 1;
     echo '<div class="main_container">';
           

@@ -2,8 +2,8 @@
 if(isset($_POST["login"])){
 
 
-    $userName = $_POST["userName"];
-    $passd = $_POST["passd"];
+    $userName = sanitizeString($_POST["userName"]);
+    $passd = sanitizeString($_POST["passd"]);
 
     $userMatch = false;
     $accountMatch = false;

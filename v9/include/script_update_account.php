@@ -39,7 +39,7 @@ if(isset($_SESSION["userName"])){
             if (!$firstUpdate) {
                 $sql .= ", "; //need a comma if this is not the first updated column
             }
-            $name = $_POST["userName"];
+            $userName = sanitizeString($_POST["userName"]);
             $sql .= "userName = '$name'";
             $firstUpdate = false;
 
@@ -75,7 +75,7 @@ if(isset($_SESSION["userName"])){
             if (!$firstUpdate) {
                 $sql .= ", "; //need a comma if this is not the first updated column
             }
-            $passd = $_POST["passd"];
+            $passd = sanitizeString($_POST["passd"]);
             $sql .= "passd = '$passd'";
             $firstUpdate = false;
         }
@@ -89,7 +89,8 @@ if(isset($_SESSION["userName"])){
             if (!$firstUpdate) {
                 $sql .= ", "; //need a comma if this is not the first updated column
             }
-            $firstName = $_POST["firstName"];
+            $firstName = sanitizeString($_POST["firstName"]);
+
             $sql .= "firstName = '$firstName'";
             $firstUpdate = false;
         }
@@ -103,7 +104,7 @@ if(isset($_SESSION["userName"])){
             if (!$firstUpdate) {
                 $sql .= ", "; //need a comma if this is not the first updated column
             }
-            $lastName = $_POST["lastName"];
+            $lastName = sanitizeString($_POST["lastName"]);
             $sql .= "lastName = '$lastName'";
             $firstUpdate = false;
         }
@@ -137,7 +138,8 @@ if(isset($_SESSION["userName"])){
         if (!$firstUpdate) {
             $sql .= ", "; //need a comma if this is not the first updated column
         }
-        $bio = $_POST["bio"];
+        // sanitize the string by filtering out html and php tags, backticks, characters < 32 in unicade, and encoding ampersands &
+        $bio = sanitizeString($_POST["bio"]);
         $sql .= "bio = '$bio'";
         $firstUpdate = false;
     }
@@ -202,6 +204,8 @@ if(isset($_SESSION["userName"])){
         }
       
         // $hashed_password = password_hash($passd, PASSWORD_DEFAULT);
+
+        $sql .= "WHERE userName='$currentUser'"; //finish the UPDATE statement so we only update the current user's profile
 
         if ($conn->query($sql) === TRUE) {
             header("location: ../profile.php");

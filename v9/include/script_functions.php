@@ -70,6 +70,10 @@ function loginUser($conn, $userName, $passd){
         exit();
     }
 
+//sanitize user input to prevent html tags, php tags, and other invalid characters (remove unicode < 32, remove backticks: ` , encode ampersands: &)
+function sanitizeString($value) {
+    return filter_var($value, FILTER_SANITIZE_STRING, FILER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_BACKTICK | FILTER_FLAG_ENCODE_AMP);
+}
 
 
 

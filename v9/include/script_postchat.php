@@ -10,7 +10,7 @@
 <?php
     if(isset($_SESSION['userName'])){
         $userName = $_SESSION["userName"];
-        $text = $_POST['text'];
+        $text = sanitizeString($_POST['text']);
         $roomid = $_POST['roomid'];
         
         $sql = "INSERT INTO chatroom_messages (room_id, userId, content)
