@@ -21,7 +21,7 @@
         echo '<p class="main">First Name: ' . $row["firstName"] . '</p>'; 
         echo '<p class="main">Last Name: ' . $row["lastName"] . '</p>'; ;
         echo '<p class="main">Email: ' . $row["email"] . '</p>'; 
-        echo '<form action="" method="post">';
+        echo '<form action="include/script_update_account.php" method="post">';
         echo '<p class="main">Bio: </p>'; 
         echo '<textarea class="form-control" id="bio" rows="3" name = "bio">' . $row["bio"] . '</textarea>';
         echo '<input type="submit" value="enter" name="postBio">';  

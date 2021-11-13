@@ -15,7 +15,11 @@ display images updated to
 -allowed image formats include .jpg, .jpeg, or .png
 
 -updated -index.php only- to order posts descending by id (instead of date) so 
-the newest post appears at the top (adjust date to include time in db?)
+the newest post appears at the top (adjust date to include time in db?).
+-updated index.php closing div so right bar displays properly when there is more than one post, 
+ and when the posts query fails
+
+-updated feed.php to display posts using the new design from index.php instead of the old design
 
 -user is able to search for posts
 -user can filter search by user or post
@@ -23,6 +27,8 @@ the newest post appears at the top (adjust date to include time in db?)
 
 -added edit button to profile.php, redirects users to edit.php
 where they can edit their bio and update it to the database
+-added script_update_account.php which edit.php uses to update the bio. this script also has
+ framework for editing the user's other account information
 
 --todo
 consider delete post

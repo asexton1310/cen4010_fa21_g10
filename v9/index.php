@@ -49,10 +49,9 @@
         </div>
     <?php } // close the if ($row["postLevel"] == 0)
       } //close the while loop
-      echo '</div>'; //this closes the <div class="main_container"> so that right bar displays properly
-      include 'right_bar.php';
-
-  } //close the if ($result = $conn->query($query))    
+  } //close the if ($result = $conn->query($query))
+  echo '</div>'; //this closes the <div class="main_container"> so that right bar displays properly 
+  include 'right_bar.php';   
 ?>
 
 <?php
