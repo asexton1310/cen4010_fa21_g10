@@ -1,6 +1,7 @@
 <?php
 if(isset($_POST["login"])){
-
+    require_once 'script_db_connection.php';
+    require_once 'script_functions.php';
 
     $userName = sanitizeString($_POST["userName"]);
     $passd = sanitizeString($_POST["passd"]);
@@ -9,8 +10,7 @@ if(isset($_POST["login"])){
     $accountMatch = false;
     $invalid_password = true;
 
-    require_once 'script_db_connection.php';
-    require_once 'script_functions.php';
+    $hash_entered_password = md5($passd);
 
     $query = "SELECT * FROM relay_user";
 
@@ -27,9 +27,15 @@ if(isset($_POST["login"])){
     if($userName == true){
             if ($result = $conn->query($query)) {
             while ($row = $result->fetch_assoc()) {
-                if($userName == $row["userName"] && $passd == $row["passd"]){
-                    $invalid_password = false;
-                }
+               
+               if(password_verify($passd, $row["passd"]) >= 1){
+                        $invalid_password = false;
+               }
+         
+                  
+                
+                
+              
             }
         }
     } 

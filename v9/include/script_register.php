@@ -171,6 +171,9 @@ if(isset($_POST["submit"])){
         $lastName = sanitizeString($lastName);
         $email = sanitizeString($email);
 
+        // hashes passowrd 
+        $passd = password_hash($passd,PASSWORD_DEFAULT);
+
         $sql = "INSERT INTO relay_user (userName, passd, firstName, lastName, email, code, status)
         VALUES ('$name', '$passd', '$firstName', '$lastName', '$email', '$code', '$status')";
 
