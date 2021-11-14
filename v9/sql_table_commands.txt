@@ -2,7 +2,7 @@
 create table relay_user (
 	id int(11) not null PRIMARY KEY AUTO_INCREMENT,
 	userName varchar(25) not null,
-	passd varchar(25) not null,
+	passd varchar(256) not null,
 	firstName varchar(25) not null,
 	lastName varchar(25) not null,
 	email varchar(30) not null,
