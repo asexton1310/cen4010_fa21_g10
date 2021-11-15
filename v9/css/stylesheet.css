@@ -67,6 +67,9 @@ a:active {
   text-decoration:none;
   color: #A9A9A9;
 }
+textarea {
+  resize:none;
+}
 /*styles for the nav bar*/
 .header{
   padding: 5px 20px;

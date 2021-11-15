@@ -11,10 +11,11 @@ require_once 'script_functions.php';
 
 if(isset($_POST["postSubmit"])){
     
-
+        //sanitizeString is used below to protect user input
         $userName = $_SESSION["userName"];
-        $title = $_POST["title"];
-        $content = $_POST["content"];
+        $title = sanitizeString($_POST["title"]);
+        $content = sanitizeString($_POST["content"]);
+        $teaser = sanitizeString($_POST["teaser"]);
         $postLevel = $_POST["postLevel"];
         $date = date("Y-m-d");
 
@@ -50,8 +51,9 @@ if(isset($_POST["postSubmit"])){
                 exit();
                 }
             }
-
-            $sql = ("INSERT into posts (usrName, title, content, image, postLevel, postDate) VALUES ('$userName', '$title', '$content', '$imgContent', '$postLevel', '$date')"); 
+            //insert the new post into posts table
+            $sql = ("INSERT into posts (usrName, title, teaser, content, image, postLevel, postDate) 
+                     VALUES ('$userName', '$title', '$teaser', '$content', '$imgContent', '$postLevel', '$date')"); 
 
             if ($conn->query($sql) === TRUE) {
                 header("location: ../index.php");

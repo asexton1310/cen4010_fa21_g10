@@ -61,8 +61,8 @@
         echo '<div class="container-fluid">';
         echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
         echo '<div class="container title"><h3>';  echo $row["usrName"]; echo " // "; echo $row["title"]; echo '</h3></div>';
-        echo '<div class="container content">';
-        echo $row["content"]; 
+        echo '<div class="container teaser">';
+        echo $row["teaser"]; 
         echo '<br>';
         if ($row["image"]){
       ?>

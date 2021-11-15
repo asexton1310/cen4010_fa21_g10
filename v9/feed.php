@@ -33,7 +33,7 @@
                     </div>
                     <div class="post_content">
                             <h3 class = "post_title"><?php echo $row["title"]?></h3>
-                            <p class="post content"><?php echo $row["content"]?></p>
+                            <p class="post teaser"><?php echo $row["teaser"]?></p>
                     </div>
                     <div class="postimg">
                             <img class = "post_img" onerror='this.style.display = "none"'

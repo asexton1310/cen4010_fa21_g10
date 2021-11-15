@@ -28,6 +28,14 @@ where they can edit their bio and update it to the database
 -added calls to sanitizeString to user inputted values in script_update_account, script_return_search, 
 script_postchat, script_register, script_login, and returned_search.php
 
+-updated post creation page to allow users to manually or automatically enter a Teaser
+ for their post
+-post page will automatically adjust text input size at 200 characters
+-updated index.php, feed.php, and other pages that display posts to display the post's teaser
+ instead of main content. Main content will be displayed when the post is expanded.
+-added expandpost.php which will display the entire post, including both teaser and content, if
+ the current user is permitted to view the post.
+
 --todo
 consider delete post
 consider seperating posts friends and personal posts

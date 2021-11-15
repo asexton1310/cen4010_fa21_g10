@@ -22,14 +22,26 @@
   <div class="container-sm posts shadow p-3 mb-5 bg-white rounded">
     <div class="container_title"><h3>Create Post</h3></div>
     <div class="container content" id = "container_content">
-      <form action = "include/script_post.php" method="POST" enctype="multipart/form-data">
+      <!-- form's checkbox child will be removed on submit using jquery -->
+      <form id="postform" action="include/script_post.php" method="POST" enctype="multipart/form-data">
         <div class="form-group">
           <label for="exampleFormControlInput1">Title</label>
           <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="Enter Title for Post" name="title">
         </div>
         <div class="form-group">
+          <!-- this checkbox is used to show/hide the teaser -->
+          <label for="teasercheckbox">Edit Teaser</label>
+          <input type="checkbox" id="teasercheckbox">
+        </div>
+        <div class="form-group" id="teaser-form" style="display:none;">
+          <!-- teaser starts hidden with style attribute. it is hidden here and not in a css file so that it can be changed by jquery -->
+          <label for="teaser">Teaser</label>
+          <textarea class="form-control" id="teaser" rows="3" name = "teaser" maxlength="200"></textarea>
+        </div>
+        <div class="form-group">
+          <!-- textarea's rows attribute is changed in jquery to automatically resize it -->
           <label for="exampleFormControlTextarea1">Content</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "content"></textarea>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name = "content" maxlength="500"></textarea>
         </div>
         <br>
         <label>Select Image File:</label>
@@ -71,6 +83,8 @@ echo '</div>';
 echo '</div>';
 include 'right_bar.php';
 ?>
+
+<script type="text/javascript" src="js/post.js"></script>
 
 <?php
   include_once 'footer.php';
