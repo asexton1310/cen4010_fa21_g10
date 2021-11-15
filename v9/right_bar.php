@@ -6,8 +6,9 @@
 if (isset($_SESSION["userName"])){
     //below query selects users friends that are also online
     $query = "SELECT relationship_table.otherUser, relationship_table.relationship_level FROM relationship_table, online_users
-                          WHERE (relationship_table.currentUser='$userName' AND relationship_table.otherUser = online_users.userName
-                          )";
+                          WHERE (online_users.lastonline >= CURRENT_TIMESTAMP - INTERVAL 10 MINUTE AND 
+                                 relationship_table.currentUser='$userName' AND relationship_table.otherUser = online_users.userName
+                          )";    
     $friends_row_num = 1;
     if ($result = $conn->query($query)) {
         ?>

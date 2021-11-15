@@ -1,4 +1,5 @@
 <?php
+/*
 if(isset($_POST['check'])){
     $otp_code = mysqli_real_escape_string($con, $_POST['otp']);
     $check_code = "SELECT * FROM usertable WHERE code = $otp_code";
@@ -23,7 +24,7 @@ if(isset($_POST['check'])){
         $errors['otp-error'] = "You've entered incorrect code!";
     }
 }
-
+*/
 if(isset($_POST["submit"])){
     
     //note that these are sanitized later, that way any encoded characters are checked 
@@ -176,7 +177,7 @@ if(isset($_POST["submit"])){
 
         $sql = "INSERT INTO relay_user (userName, passd, firstName, lastName, email, code, status)
         VALUES ('$name', '$passd', '$firstName', '$lastName', '$email', '$code', '$status')";
-
+	/*
         if ($conn->query($sql) === TRUE) {
             $insert_data = "INSERT INTO relay_user ()
             values()";
@@ -204,7 +205,8 @@ if(isset($_POST["submit"])){
             echo "Error: " . $sql . "<br>" . $conn->error;
         }
         $conn->close();
-      
+      	*/
+
         if ($conn->query($sql) === TRUE) {
             header("location: ../login.php");
         } else {

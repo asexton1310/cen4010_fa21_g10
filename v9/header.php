@@ -26,7 +26,7 @@
             }
         }
         else {
-            echo "query failed: " . $result->error;
+            //echo "query failed: " . $result->error;
         }
     }
 ?>
@@ -87,7 +87,7 @@
           </div>
       <?php } else { ?>
         <div class = "header_middle_in">
-          <a class="header_option active" href='feed.php'>
+          <a class="header_option active" href='index.php'>
             <span style= "display: block;" class='nav_item'>Community</span>
           </a>
           <a class="header_option" href='login.php'>

@@ -3,7 +3,7 @@
 
 <script>
   var btncontainer = document.getElementById("header_middle_in");
-  var btns = btncontainer.getElementsByClassName("header_option");
+  var btns = document.getElementsByClassName("header_option");
   
   for(var i = 0; i < btns.length; i++){
     btns[i].addEventListener('click', function(){

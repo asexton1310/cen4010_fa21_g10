@@ -5,8 +5,9 @@ $(document).ready(function(){
         var recipient = $(this).val();
         $.post("include/script_chatroom.php", { mode: "create"}, function(roomid) {
             //callback function, roomid is sent in response
-            $.post("include/script_chatinvite.php", { otherUser: recipient, mode: "invite", room: roomid });
-            $.post("include/script_chatroom.php", { mode: "adduser", room: roomid}, function() {
+	    var cleanroomid = roomid.replace(/\s+/g, "");
+            $.post("include/script_chatinvite.php", { otherUser: recipient, mode: "invite", room: cleanroomid });
+            $.post("include/script_chatroom.php", { mode: "adduser", room: cleanroomid }, function() {
                 //callback function that redirects this user to the chatroom they just created
                 window.location = "chatroom.php?room=" + roomid;
             });

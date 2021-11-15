@@ -42,7 +42,8 @@
                     </thead>
                     <tbody>';
                     $query = "SELECT relationship_table.otherUser, relationship_table.relationship_level FROM relationship_table, online_users
-                            WHERE (relationship_table.currentUser='$userName' AND relationship_table.otherUser = online_users.userName AND relationship_table.otherUser NOT IN (
+                            WHERE (online_users.lastonline >= CURRENT_TIMESTAMP - INTERVAL 10 MINUTE AND
+                                relationship_table.currentUser='$userName' AND relationship_table.otherUser = online_users.userName AND relationship_table.otherUser NOT IN (
                                 SELECT userId FROM chatroom_participants WHERE room_id = $roomid)
                             )";
                     $friends_row_num = 1;
