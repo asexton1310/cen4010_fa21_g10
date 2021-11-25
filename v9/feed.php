@@ -9,7 +9,7 @@
 
     $currentUser = $_SESSION["userName"];
 
-    $query = "SELECT * FROM posts, (SELECT currentUser, relationship_level FROM relationship_table WHERE otherUser='$currentUser' AND relationship_level >= 1) AS relationship_results
+    $query = "SELECT * FROM posts, (SELECT currentUser, relationship_level FROM relationship_table WHERE otherUser='$currentUser' AND relationship_level >= 0) AS relationship_results
               WHERE posts.postLevel <= relationship_results.relationship_level AND posts.usrName = relationship_results.currentUser";
 
     echo '<div class="main_container">';
@@ -19,7 +19,7 @@
             $post_level = $row['postLevel'];
          //   echo "$relationship_level - $post_level <br />";
             //$_SESSION["userName"]
-            if($post_level >= 1){ ?>
+            if($post_level >= 0){ ?>
                 <div class="post_container"><!--post with like and comment active due to user login starts-->
                     <div class="post_top">
                         <img class = "profile_img post_profile_pic"
@@ -27,13 +27,13 @@
                                     alt=""          
                                 />
                         <div class = "post_info">
-                            <h6><?php echo $row["usrName"]?></h6>
+                            <h6><?php echo '<a href="user_profile.php?usrName='.$row["usrName"].'">'; echo $row["usrName"]; echo '</a>';?></h6>
                             <p> <?php echo $row["postDate"]?></p>
                         </div>
                     </div>
                     <div class="post_content">
                             <h3 class = "post_title"><?php echo $row["title"]?></h3>
-                            <p class="post teaser"><?php echo $row["teaser"]?></p>
+                            <p class="post content"><?php echo $row["content"]?></p>
                     </div>
                     <div class="postimg">
                             <img class = "post_img" onerror='this.style.display = "none"'

@@ -19,13 +19,13 @@
                             alt=""          
                         />
                 <div class = "post_info">
-                    <h6><?php echo $row["usrName"]?></h6>
+                <h6><?php echo '<a href="user_profile.php?usrName='.$row["usrName"].'">'; echo $row["usrName"]; echo '</a>';?></h6>
                     <p> <?php echo $row["postDate"]?></p>
                 </div>
             </div>
             <div class="post_content">
-                    <h3 class = "post_title"><?php echo '<a href="expandpost.php?id='.$row["id"].'">'.$row["title"].'</a>'?></h3>
-                    <p class="post teaser"><?php echo $row["teaser"]?></p>
+                    <h3 class = "post_title"><?php echo $row["title"]?></h3>
+                    <p class="post content"><?php echo $row["content"]?></p>
             </div>
             <div class="postimg">
                     <img class = "post_img" onerror='this.style.display = "none"'
