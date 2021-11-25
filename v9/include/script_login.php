@@ -78,7 +78,7 @@ if(isset($_POST["login"])){
                   VALUES ('$userName')";
 
         if ($result = $conn->query($query)) {
-            header("location: ../index.php");
+            header("location: ../feed.php");
         }
         else {
             header("location: ../index.php?error=activityfail");
