@@ -16,7 +16,7 @@
     echo $id;
 
     //update the existing friend request to become a friendship
-    $sql = "UPDATE relationship_table SET request_status = 1, relationship_level = 1 WHERE id=$id AND currentUser='$currentUser' AND otherUser='$otherUser'";
+    $sql = "UPDATE relationship_table SET request_status = 1, relationship_level = '$relationship_level' WHERE id=$id AND currentUser='$currentUser' AND otherUser='$otherUser'";
     if ($conn->query($sql) === TRUE) {
         echo "Record updated successfully";
     } else {
