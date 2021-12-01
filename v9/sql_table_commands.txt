@@ -24,7 +24,11 @@ create table posts (
 	image LONGBLOB,
 	postLevel int not null,
 	likes int not null default 0,
-	postDate DATE not null
+	postDate DATE not null,
+	comment varchar(256) DEFAULT NULL,
+	comment_by varchar(256) DEFAULT NULL,
+	comment_date date DEFAULT NULL
+
 )
 
 // create friendships table - enter into database sql tab
