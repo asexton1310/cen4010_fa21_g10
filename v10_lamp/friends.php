@@ -30,6 +30,7 @@
         <th scope="col">#</th>
         <th scope="col">Username</th>
         <th scope="col">Friend Level</th>
+        <th scope="col"  colspan="2">Set Friend Level</th>
         <th scope="col">Unfriend</th>
     </tr>
     </thead>
@@ -48,7 +49,8 @@
                 else {
                     echo '<td> Friend </td>';
                 }
-                //echo '<td> '.$row["relationship_level"]. ' </td>';
+                echo '<td><a href="include/script_manage_friend.php?otherUser=' .$row["otherUser"].'&currentUser=' .$row["currentUser"].'&level=1&row=' .$row["id"].'"> Friend</a></td>';
+                echo '<td><a href="include/script_manage_friend.php?otherUser=' .$row["otherUser"].'&currentUser=' .$row["currentUser"].'&level=2&row=' .$row["id"].'"> Best Friend </a></td>';
                 echo '<td><a href="include/script_remove_friend.php?otherUser=' .$row["otherUser"].'"> remove</a></td>';
                 echo '</tr>';
                 $friends_row_num = $friends_row_num+1;
