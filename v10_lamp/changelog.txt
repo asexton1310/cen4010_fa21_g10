@@ -1,0 +1,11 @@
+added files from lamp server with additional changes since 11/15
+
+
+--todo
+unlike functionality
+search feature fix to hide friends and best friends only posts from users who are not your friend
+manage friends feature added
+finish front-end css and html to give the site a uniform design
+
+
+
