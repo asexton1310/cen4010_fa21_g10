@@ -64,8 +64,15 @@
        echo '<table class="table">
 
        <tbody>';
-       
-         $sql="select * from posts where title like '%$search_value%' OR content like '%$search_value%'";
+         $currentUser = $_SESSION["userName"];
+         //ugly query that returns public posts that match search criteria, or friends/best friends only posts that meet criteria 
+         // AND the post author is a friend of the user who performed the search
+         $sql="SELECT * from posts, (SELECT currentUser, relationship_level FROM relationship_table 
+                                    WHERE otherUser='$currentUser' AND relationship_level >= 0) AS relationship_results  
+                where (posts.title like '%$search_value%' AND posts.postLevel = 0) OR (posts.content like '%$search_value%' AND posts.postLevel = 0)
+                OR (posts.title like '%$search_value%' AND posts.postLevel <= relationship_results.relationship_level AND posts.usrName = relationship_results.currentUser)
+                OR (posts.content like '%$search_value%' AND posts.postLevel <= relationship_results.relationship_level AND posts.usrName = relationship_results.currentUser)";
+
          $result=$conn->query($sql);
        
          echo 'Search results: ';
@@ -74,7 +81,7 @@
          if ($result->num_rows>0){
           while ($row = $result->fetch_assoc()) {
             
-            if($row["postLevel"] == 1 || $row["postLevel"] == 2){
+            if($row["postLevel"] >= 0){
               echo '<div class="container-fluid">';
               echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
               echo '<div class="container_title" ><h3>'; echo '<a href="user_profile.php?usrName='.$row["usrName"].'">'; echo $row["usrName"]; echo '</a>'; echo " // "; echo $row["title"];  echo " // "; echo $row["postDate"]; echo '</h3></div>';
