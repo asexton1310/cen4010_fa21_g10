@@ -23,7 +23,6 @@ if (isset($_SESSION["userName"])){
                     <div class="right_sidebar_row">
                         <span class="material-icons">account_circle</span>
                             <h6>'.$row["otherUser"].'</h6>
-                        <span id="Message" class="material-icons chatinvite" value="'.$row["otherUser"].'">message</span>
                     </div>
                     ';
 
@@ -41,9 +40,6 @@ if (isset($_SESSION["userName"])){
         </div>
       </div><!--right sidebar class ends ends-->
     <?php } ?>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script type="text/javascript" src="js/chat.js"></script>
 
     <div class="left_side_bar_out">
       </div><!--left sidebar class ends ends-->

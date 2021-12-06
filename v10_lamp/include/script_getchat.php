@@ -15,8 +15,8 @@
 
     if ($result = $conn->query($query)) {
         while ($row = $result->fetch_assoc()) {
-            echo '<div class="container content">';
-            echo '<b>'.$row["date"].' '.$row["userId"].': </b>'.$row["content"]; 
+            echo '<div class="container">';
+            echo ''.$row["date"].' <b>'.$row["userId"].': </b>'.$row["content"]; 
             echo '</div>';
         }
     }       

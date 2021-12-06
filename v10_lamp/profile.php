@@ -33,63 +33,69 @@
         echo '<p class="main">Email: ' . $row["email"] . '</p>'; 
         echo '<p class="main">Bio: ' . $row["bio"] . '</p>'; 
         echo'<form action="edit.php" method="post">
-        <input type="submit" value="edit">
+        <input type="submit" value="Edit">
         </form>';
         echo '<br>  ';
         echo '</div>';
+        echo '</div>';
+        echo '</div>';
     }
   } 
-      
-  // display current friend requests
- 
-  //end display friend request section
-
-  // sent requests
-
-  //end sent requests section
-
-  echo '</div>';
-  echo '</div>';
-
-
 
   // display personal posts
   $query = "SELECT * FROM posts WHERE usrName='$currentUser'";
 
   if ($result = $conn->query($query)) {
       while ($row = $result->fetch_assoc()) {
-        echo '<div class="container-fluid">';
-        echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
-        echo '<div class="container title"><h3>';  echo $row["usrName"]; echo " // "; echo $row["title"]; echo '</h3></div>';
-        echo '<div class="container teaser">';
-        echo $row["teaser"]; 
-        echo '<br>';
-        if ($row["image"]){
-      ?>
-     <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" style='height: 100%; width: 100%; object-fit: cover' /> 
-      <?php }
-        echo '<br>';
-        echo '<br>';
-        echo '</div>';
-        echo '<div class="container footer"><p class="footer"></p></div>';
-        echo '</div>';
-        echo '</div>';
+        ?>
+        <div class="post_container bg-white"><!--post with like and comment active due to user login starts-->
+            <div class="post_top">
+                <img class = "profile_img post_profile_pic"
+                            src="my_profile_placeholder.jpg"
+                            alt=""          
+                        />
+                <div class = "post_info">
+                    <h6><?php echo '<a href="user_profile.php?usrName='.$row["usrName"].'">'; echo $row["usrName"]; echo '</a>';?></h6>
+                    <p> <?php echo $row["postDate"]?></p>
+                </div>
+            </div>
+            <div class="post_content">
+                    <h3 class = "post_title"><?php echo '<a href="expandpost.php?id='.$row["id"].'">'.$row["title"].'</a>'?></h3>
+                    <p class="post teaser"><?php echo $row["teaser"]?></p>
+            </div>
+            <div class="postimg">
+                    <img class = "post_img" onerror='this.style.display = "none"'
+                    src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" style='height: 100%; width: 100%; object-fit: cover'
+                        alt=""          
+                    />
+            </div>
+            <div class="post_totals">
+                    <p><?php echo $row["likes"]?> Likes</p>
+                    <p>comment count</p>
+                    <p>shares count</p>
+            </div>
+            <div class="post_interact">
+                    <?php
+                    echo '<a class = "interaction_option" href="include/script_add_likes.php?id='.$row["id"].'&likes='.$row["likes"].'">';
+                    echo '                  <span style="display: block;" class="material-icons">favorite_border</span>  </a> ';
+                    ?> 
+                    <span class="material-icons">chat_bubble_outline</span>
+                    <span class="material-icons">ios_share</span>
+            </div>
+        </div>
+        <?php
      }
     }
     
-  // return to index if no current session
+  // return to login if no current session
   else{
     header("location: login.php");
   }
-  echo '</div>';
+  echo '</div>'; // close main_container div
 
   include 'right_bar.php';
-
-
-?>       
-     
+?>           
 
 <?php
-
   include_once 'footer.php';
 ?>

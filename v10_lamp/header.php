@@ -90,9 +90,6 @@
           <a class="header_option <?php echo ($_SERVER['PHP_SELF'] == "/post.php" ? "active" :"");?>" href='post.php'>
             <span style= "display: block;" class='nav_item'>Post</span>
           </a>
-          <a class="header_option <?php echo ($_SERVER['PHP_SELF'] == "/chat.php" ? "active" :"");?>" href='chat.php'>
-            <span style= "display: block;" class='nav_item'>Chat</span>
-          </a> 
           </div>
       <?php } else { ?>
         <div class = "header_middle_in">
@@ -110,9 +107,12 @@
         <!-- right side of nav bar -->
         <?php if (isset($_SESSION["userName"])){ ?>
           <div class = "header_right_in">
-            <div class="notif">
-              <span class="material-icons">notifications</span>
-            </div>
+            <?php
+            //commented out notification symbol, since we have not implemented it
+            // <div class="notif">
+            //   <span class="material-icons">notifications</span>
+            // </div>
+            ?>
             <a class="log_out" href='include/script_logout.php'>
               <span class="material-icons">logout</span>
             </a>
@@ -157,17 +157,15 @@
           alt=""          
           />
           <h6><?php echo $_SESSION["userName"]?></h6>
-      </a>
-        <div class="left_sidebar_in">
-        <a class="left_sidebar_row" href='friends.php'>
-          <span class="material-icons">people</span>
+        </a>
+        <a class="left_sidebar_row " href='friends.php'>
+          <span class="material-icons text-body">people</span>
           <h6>All Friends</h6>
-    </a>
-        </div>
-        <div class="left_sidebar_row">
-          <span class="material-icons">forum </span>
+        </a>
+        <a class="left_sidebar_row" href='chat.php'>
+          <span class="material-icons text-body">forum </span>
           <h6>Active Chats</h6>
-        </div>
+        </a>
       </div><!--left sidebar active class ends ends-->
     <?php } else { ?>
       <div class="left_side_bar_in" style = "visibility: hidden;"><!--left sidebar is hidden because user is not logged in but shape remains-->

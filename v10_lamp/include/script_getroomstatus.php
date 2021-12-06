@@ -33,15 +33,14 @@
                 $response->roomstatus = (int) $row["status"];
                 $response->html = '
                 <div class="container-sm posts shadow p-3 mb-5 bg-white rounded">
-                    <div class="container title">
-                        <h3>Chat. Welcome, <b>'.$_SESSION['userName'].'</b></h3>
+                    <div class="container_title">
+                        <h3>Welcome to Chatroom '.$roomid.', <b>'.$_SESSION['userName'].'</b></h3>
                         <p id="displaystatus"></p>
                         <p class="logout"><a id="exit" href="#">Exit Chatroom</a></p>
                     </div>
 
                     <div class="container content">
                         <p class="main" id="chatbox"></p>
-                        <br>
                     </div>
 
                     <div class="container footer">

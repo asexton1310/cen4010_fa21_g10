@@ -2,7 +2,7 @@
 $(document).ready(function(){
     //If user sends chat request
     $(".chatinvite").click(function () {
-        var recipient = $(this).val();
+        var recipient = $(this).attr("value");
         $.post("include/script_chatroom.php", { mode: "create"}, function(roomid) {
             //callback function, roomid is sent in response
 	    var cleanroomid = roomid.replace(/\s+/g, "");
@@ -13,7 +13,7 @@ $(document).ready(function(){
             });
         })
         $(this).parent().after("Request Sent!"); // add the request sent message after the parent form
-        $(this).parent().remove(); // delete the parent form and all its contents
+        //$(this).parent().remove(); // delete the parent form and all its contents
         return false;
     });
 

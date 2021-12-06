@@ -36,23 +36,22 @@
     }
 
     $query = "SELECT * FROM relay_user WHERE username='$usrName'";
-    
+    echo '<div class="main_container">';
     // if results
     if ($result = $conn->query($query)) { 
         $row = $result->fetch_assoc();    
         echo '<div class="container-fluid">';
         echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
-        echo '<div class="container title"><h3>user profile</h3></div>';  
-
-        echo '<div class="container content">';
-        echo '<p class="main">User Name: ' . $row["userName"] . '</p>'; 
-        echo '<p class="main">First Name: ' . $row["firstName"] . '</p>'; 
-        echo '<p class="main">Last Name: ' . $row["lastName"] . '</p>'; ;
-        echo '<p class="main">Bio: ' . $row["bio"] . '</p>'; 
-        echo '<br>  ';
-        echo '</div>';
-        echo '<div class="container content">';
-        if($isCurrentFriend == false && $isRequestPending == false && $haveReceivedRequest == false){
+        echo '<div class="container_title"><h3>'. $row["userName"] .'\'s Profile</h3></div>';  
+        echo '<div class="container content" id = "container_content">';
+        echo '<p class="main">User Name: ' . $row["userName"] . '</p>';
+        //hide first and last name from non-friends
+        if ($isCurrentFriend) {
+            echo '<p class="main">First Name: ' . $row["firstName"] . '</p>'; 
+            echo '<p class="main">Last Name: ' . $row["lastName"] . '</p>'; ;
+        }
+        echo '<p class="main">Bio: ' . $row["bio"] . '</p>';
+            if($isCurrentFriend == false && $isRequestPending == false && $haveReceivedRequest == false){
             echo '<a href="include/script_add_request.php?otherUser='.$row["userName"].'">'; echo " request friendship"; echo '</a>';
         }
         else if($isCurrentFriend){
@@ -65,81 +64,114 @@
             echo " user has sent you a friend request, ";
             echo '<a href="profile.php">'; echo " go to your profile"; echo '</a>';
         }
+        echo '<br>  ';
         echo '</div>';
-        echo '<div class="container footer"><p class="footer">.</p></div>';
+        echo '</div>';
         echo '</div>';
     }
-  
 
-    $query = "SELECT * FROM posts WHERE usrname='$usrName' AND postLevel=0";
-
-    if ($result = $conn->query($query)) {
-        while ($row = $result->fetch_assoc()) {
-            echo '<div class="container-fluid">';
-            echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
-            echo '<div class="container title"><h3>'; echo $row["usrName"]; echo " // "; echo $row["title"];  echo " // "; echo $row["postDate"]; echo '</h3></div>';
-            echo '<div class="container teaser">';
-            echo $row["teaser"]; 
-            echo '<br>';
-            echo '<br>';
-            echo '</div>';
-            echo '<div class="container footer"><p class="footer">.</p></div>';
-            echo '</div>';
-            echo '</div>';          
-        }
-    }
-
-      $query = "SELECT posts.usrName, posts.title, posts.content, posts.image, posts.postLevel, posts.postDate, posts.id, posts.likes, relationship_table.otherUser, relationship_table.currentUser, relationship_table.relationship_level  from posts, relationship_table where posts.postLevel = relationship_table.relationship_level";
-
-      if ($result = $conn->query($query)) {
-    
-        while ($row = $result->fetch_assoc()) {
-            
-            $posterUserName = $row['usrName'];
-            $friendName = $row['otherUser'];
-            $friendName2 = $row['currentUser'];
-
-            $relationship_level = $row['relationship_level'];
-            $post_level = $row['postLevel'];
-
-         //   echo "$relationship_level - $post_level <br />";
-            //$_SESSION["userName"]
-            if($post_level >= 1){
-                if(($posterUserName == $friendName || $posterUserName == $friendName2) && $_SESSION["userName"] != $posterUserName && ($_SESSION["userName"] == $friendName || $_SESSION["userName"] == $friendName2)){
-                    echo '<div class="container-fluid">';
-                    echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
-                    echo '<div class="container title"><h3>'; echo '<a href="user_profile.php?usrName='.$row["usrName"].'">'; echo $row["usrName"]; echo '</a>'; echo " // "; echo $row["title"];  echo " // "; echo $row["postDate"]; echo '</h3></div>';
-                    echo '<div class="container teaser">';
-                    echo $row["teaser"]; 
-                    echo '<br>';
-                    echo '<br>';
-                    if ($row["image"]){
-                  ?>
-                 <img src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" style='height: 100%; width: 100%; object-fit: cover' /> 
-                  <?php }
-                    echo '<br>';
-                    echo '</div>';
-                    echo '<div class="container footer"><p class="footer">'; echo '<a href="include/script_add_likes.php?id='.$row["id"].'&likes='.$row["likes"].'">'; echo 'like  </a> // '; echo $row["likes"]; echo '</p></div>';
-                    echo '</div>';
-                    echo '</div>';
-                }
+    if ($isCurrentFriend) {
+        //display user's posts
+        $query = "SELECT * FROM posts, (SELECT currentUser, relationship_level FROM relationship_table WHERE otherUser='$currentUser' AND relationship_level >= 0) AS relationship_results
+                  WHERE posts.postLevel <= relationship_results.relationship_level AND posts.usrName = relationship_results.currentUser";
+        
+        if ($result = $conn->query($query)) {
+            while ($row = $result->fetch_assoc()) { 
+                ?>
+                <div class="post_container bg-white"><!--post with like and comment active due to user login starts-->
+                    <div class="post_top">
+                        <img class = "profile_img post_profile_pic"
+                                    src="my_profile_placeholder.jpg"
+                                    alt=""          
+                                />
+                        <div class = "post_info">
+                            <h6><?php echo '<a href="user_profile.php?usrName='.$row["usrName"].'">'; echo $row["usrName"]; echo '</a>';?></h6>
+                            <p> <?php echo $row["postDate"]?></p>
+                        </div>
+                    </div>
+                    <div class="post_content">
+                            <h3 class = "post_title"><?php echo '<a href="expandpost.php?id='.$row["id"].'">'.$row["title"].'</a>'?></h3>
+                            <p class="post teaser"><?php echo $row["teaser"]?></p>
+                    </div>
+                    <div class="postimg">
+                            <img class = "post_img" onerror='this.style.display = "none"'
+                            src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" style='height: 100%; width: 100%; object-fit: cover'
+                                alt=""          
+                            />
+                    </div>
+                    <div class="post_totals">
+                            <p><?php echo $row["likes"]?> Likes</p>
+                            <p>comment count</p>
+                            <p>shares count</p>
+                    </div>
+                    <div class="post_interact">
+                            <?php
+                            echo '<a class = "interaction_option" href="include/script_add_likes.php?id='.$row["id"].'&likes='.$row["likes"].'">';
+                            echo '                  <span style="display: block;" class="material-icons">favorite_border</span>  </a> ';
+                            ?> 
+                            <span class="material-icons">chat_bubble_outline</span>
+                            <span class="material-icons">ios_share</span>
+                    </div>
+                </div>
+                <?php
             }
         }
-    }  
-  
-  
-  
-  
-  
-  
-  
-  
-  } // end if
 
+    }
+    else {
+        // display user's public posts
+        $query = "SELECT * FROM posts WHERE usrname='$usrName' AND postLevel=0";
+
+        if ($result = $conn->query($query)) {
+            while ($row = $result->fetch_assoc()) {
+                ?>
+                <div class="post_container bg-white"><!--post with like and comment active due to user login starts-->
+                    <div class="post_top">
+                        <img class = "profile_img post_profile_pic"
+                                    src="my_profile_placeholder.jpg"
+                                    alt=""          
+                                />
+                        <div class = "post_info">
+                            <h6><?php echo '<a href="user_profile.php?usrName='.$row["usrName"].'">'; echo $row["usrName"]; echo '</a>';?></h6>
+                            <p> <?php echo $row["postDate"]?></p>
+                        </div>
+                    </div>
+                    <div class="post_content">
+                            <h3 class = "post_title"><?php echo '<a href="expandpost.php?id='.$row["id"].'">'.$row["title"].'</a>'?></h3>
+                            <p class="post teaser"><?php echo $row["teaser"]?></p>
+                    </div>
+                    <div class="postimg">
+                            <img class = "post_img" onerror='this.style.display = "none"'
+                            src="data:image/jpg;charset=utf8;base64,<?php echo base64_encode($row['image']); ?>" style='height: 100%; width: 100%; object-fit: cover'
+                                alt=""          
+                            />
+                    </div>
+                    <div class="post_totals">
+                            <p><?php echo $row["likes"]?> Likes</p>
+                            <p>comment count</p>
+                            <p>shares count</p>
+                    </div>
+                    <div class="post_interact">
+                            <?php
+                            echo '<a class = "interaction_option" href="include/script_add_likes.php?id='.$row["id"].'&likes='.$row["likes"].'">';
+                            echo '                  <span style="display: block;" class="material-icons">favorite_border</span>  </a> ';
+                            ?> 
+                            <span class="material-icons">chat_bubble_outline</span>
+                            <span class="material-icons">ios_share</span>
+                    </div>
+                </div>
+                <?php        
+            }
+        }
+    }
+  } // end if
   // return to index if no current session
   else{
     header("location: login.php");
   }
+  echo '</div>'; // close main_container div
+
+  include 'right_bar.php';
 ?>            
 
 <?php

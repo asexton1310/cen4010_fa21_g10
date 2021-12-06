@@ -12,7 +12,7 @@
     
         while ($row = $result->fetch_assoc()) {?>
         <?php if($row["postLevel"] == 0){ ?>
-          <div class="post_container"><!--post with like and comment active due to user login starts-->
+          <div class="post_container bg-white"><!--post with like and comment active due to user login starts-->
             <div class="post_top">
                 <img class = "profile_img post_profile_pic"
                             src="my_profile_placeholder.jpg"
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="post_content">
-                    <h3 class = "post_title"><?php echo $row["title"]?></h3>
+                    <h3 class = "post_title"><?php echo '<a href="expandpost.php?id='.$row["id"].'">'.$row["title"].'</a>'?></h3>
                     <p class="post teaser"><?php echo $row["teaser"]?></p>
             </div>
             <div class="postimg">

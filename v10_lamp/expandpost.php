@@ -6,7 +6,6 @@
     require_once 'include/script_db_connection.php';
     require_once 'include/script_functions.php';
 
-    $userName = $_SESSION["userName"];
     $postid = sanitizeString($_GET['id']);
 
     //first get posts' author and post's level
@@ -24,9 +23,12 @@
         else {
             //post is friends or best friends only, so only select the post if
             //the author's friend level for this user is sufficient to view this post
-            $sql = "SELECT * FROM posts WHERE id = '$postid' AND usrName IN (
-                SELECT currentUser FROM relationship_table WHERE otherUser = '$userName' AND relationship_level >= '$postLevel'
-            )";
+            if (isset($_SESSION["userName"])) {
+                $userName = $_SESSION["userName"];
+                $sql = "SELECT * FROM posts WHERE id = '$postid' AND usrName IN (
+                    SELECT currentUser FROM relationship_table WHERE otherUser = '$userName' AND relationship_level >= '$postLevel'
+                )";
+            }
         }
         if ($result = $conn->query($sql)) {
             if (mysqli_num_rows($result) == 1) { 

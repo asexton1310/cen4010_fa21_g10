@@ -29,7 +29,7 @@
                 // display online friends list
                 echo '<div class="container-fluid">';
                     echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
-                    echo '<div class="container title"><h3>friends </h3></div>';
+                    echo '<div class="container_title"><h3>Friends </h3></div>';
                     // create a table with current friends
                     echo '<table class="table">
                     <thead>
@@ -44,7 +44,9 @@
                     $query = "SELECT relationship_table.otherUser, relationship_table.relationship_level FROM relationship_table, online_users
                               WHERE (online_users.lastonline >= CURRENT_TIMESTAMP - INTERVAL 10 MINUTE AND
                                 relationship_table.currentUser='$userName' AND relationship_table.otherUser = online_users.userName AND relationship_table.otherUser NOT IN (
-                                SELECT userId FROM chatroom_participants WHERE room_id = $roomid)
+                                SELECT userId FROM chatroom_participants WHERE room_id = $roomid
+                                UNION
+                                SELECT rec_name as userId FROM chatroom_requests WHERE room_id = $roomid)
                             )";
                     $friends_row_num = 1;
                     if ($result = $conn->query($query)) {
@@ -67,6 +69,7 @@
 
                     echo '<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>';
                     echo '<script type="text/javascript" src="js/chatroom.js"></script>';
+                    
                 echo '</div>';//close online friends list section
 
                 echo '</div>'; //close main_container div
@@ -75,7 +78,7 @@
                 echo "You're not supposed to be in this chatroom >:(";
                 header("Location: chat.php"); //Redirect the user
             }
-            include 'right_bar.php';
+            include 'chatroom_right_bar.php';
         }
         else {
             echo "Error with query : " . $conn->error;

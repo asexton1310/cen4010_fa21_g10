@@ -22,7 +22,7 @@
     // display friends list
     echo '<div class="container-fluid">';
     echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
-    echo '<div class="container title"><h3>friends </h3></div>';
+    echo '<div class="container_title"><h3>Friends </h3></div>';
     // create a table with current friends
     echo '<table class="table">
     <thead>
@@ -59,19 +59,15 @@
     }
     echo '</tbody>';
     echo '</table>';
+    echo '</div>';
+    echo '</div>';
     //end friends list section
   } 
-
-
-
-  echo '<div class="container footer"><p class="footer">.</p></div>';
-  echo '</div>';
-  echo '</div>';
       
   // display current friend requests
   echo '<div class="container-fluid">';
   echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
-  echo '<div class="container title"><h3>received requests </h3></div>';
+  echo '<div class="container_title"><h3>Received Requests </h3></div>';
 
   echo '<table class="table">
   <thead>
@@ -100,16 +96,14 @@
   } 
   echo '</tbody>';
   echo '</table>';
+  echo '</div>';
+  echo '</div>';
   //end display friend request section
-
-  echo '<div class="container footer"><p class="footer">.</p></div>';
-  echo '</div>';
-  echo '</div>';
 
   // sent requests
   echo '<div class="container-fluid">';
   echo '<div class="container-sm posts shadow p-3 mb-5 bg-white rounded">';
-  echo '<div class="container title"><h3>sent requests </h3></div>';
+  echo '<div class="container_title"><h3>Sent Requests </h3></div>';
 
   echo '<table class="table">
   <thead>
@@ -138,20 +132,14 @@
   }  
   echo '</tbody>';
   echo '</table>';
+  echo '</div>';
+  echo '</div>';
   //end sent requests section
 
-  echo '<div class="container footer"><p class="footer">.</p></div>';
-  echo '</div>';
-  echo '</div>';
-
-
-
-  // display personal posts
-  $query = "SELECT * FROM posts WHERE usrName='$currentUser'";
-
-
+  echo '</div>'; //closes main_container
 ?>            
 
 <?php
+  include 'right_bar.php';
   include_once 'footer.php';
 ?>

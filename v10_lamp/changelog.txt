@@ -1,11 +1,46 @@
-added files from lamp server with additional changes since 11/15
+- Adjusted chat.php to only display received chatroom invites.
+- Adjusted chat.php's HTML/CSS for uniformity
 
+- Adjusted chatroom.php to no longer give the option to invite users with a pending chatroom invite
+- Adjusted chatroom.php's HTML/CSS for uniformity
+
+- Created chatroom_right_bar.php. Identical to right_bar.php, except the ability to send chatroom invites is disabled
+
+- Adjusted edit.php's HTML/CSS for uniformity
+
+- Adjusted expandpost.php's HTML/CSS for uniformity
+- expandpost.php now checks if a session exists before getting the userName
+
+- Re-implemented ability to expand posts by clicking on post title in feed.php
+- Adjusted feed.php's HTML/CSS for uniformity
+ 
+- Adjusted friends.php's HTML/CSS for uniformity
+
+- Commented out notification symbol icon from header.php
+- Moved chatroom link from topnav to left sidebar so there is only one link to chat.php
+- Adjusted header.php's HTML/CSS for uniformity
+
+- Adjusted HTML/CSS returned by script_getchat.php for uniformity
+
+- Adjusted HTML/CSS returned by script_getroomstatus.php for uniformity
+
+- Re-implemented ability to expand posts by clicking on post title in index.php
+- Adjusted index.php's HTML/CSS for uniformity
+
+- Adjusted chat.js to properly get usernames when inviting users via right_bar
+
+- Adjusted profile.php's HTML/CSS for uniformity
+
+- Adjusted SQL query to not return the user's own posts in returned_search.php
+- Adjusted returned_search's HTML/CSS for uniformity
+
+- Added value attribute to Message span in right_bar.php to properly get usernames when inviting users
+
+- Adjusted SQL queries in user_profile.php to get the user's posts based on the current user's friendship level
+- Adjusted user_profile.php's HTML/CSS for uniformity
 
 --todo
 unlike functionality
-search feature fix to hide friends and best friends only posts from users who are not your friend
-manage friends feature added
-finish front-end css and html to give the site a uniform design
 
 
 
