@@ -71,11 +71,14 @@
          $currentUser = $_SESSION["userName"];
          //ugly query that returns public posts that match search criteria, or friends/best friends only posts that meet criteria 
          // AND the post author is a friend of the user who performed the search
-         $sql="SELECT * from posts, (SELECT currentUser, relationship_level FROM relationship_table 
-                                    WHERE otherUser='$currentUser' AND relationship_level >= 0) AS relationship_results  
-                where posts.usrName != '$currentUser' AND ((posts.title like '%$search_value%' AND posts.postLevel = 0) OR (posts.content like '%$search_value%' AND posts.postLevel = 0)
-                OR (posts.title like '%$search_value%' AND posts.postLevel <= relationship_results.relationship_level AND posts.usrName = relationship_results.currentUser)
-                OR (posts.content like '%$search_value%' AND posts.postLevel <= relationship_results.relationship_level AND posts.usrName = relationship_results.currentUser))";
+         $sql="SELECT * , '$currentUser' AS currentUser, 0 AS relationship_level FROM posts
+                WHERE posts.title like '%$search_value%' AND posts.postLevel = 0 OR posts.content like '%$search_value%' AND posts.postLevel = 0
+                UNION
+                SELECT * from posts, (SELECT currentUser, relationship_level FROM relationship_table
+                                      WHERE otherUser='$currentUser' AND relationship_level >= 1) AS relationship_results
+                where posts.usrName != '$currentUser' AND posts.postLevel >= 1
+                AND ((posts.title like '%$search_value%' AND posts.postLevel <= relationship_results.relationship_level AND posts.usrName = relationship_results.currentUser)
+                OR (posts.content like '%$search_value%' AND posts.postLevel <= relationship_results.relationship_level AND posts.usrName = relationship_results.currentUser))
 
          $result=$conn->query($sql);
        
