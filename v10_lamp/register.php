@@ -47,6 +47,7 @@ include_once 'header.php';
         <label for="email" class= "login_label">Email Address</label>
         <input type="text" class="inputs_style" id="email"  name="email">
       </div>
+      <p class= "text-white">By clicking Submit you agree to our <a href="policies.php" rel="external nofollow noopener" target="_blank">Terms, and Privacy Policy.</a></p>
       <?php 
         // registation error messages
         if(isset($_GET['error'])){

@@ -93,7 +93,7 @@
           </div>
       <?php } else { ?>
         <div class = "header_middle_in">
-          <a class="header_option active" href='index.php'>
+          <a class="header_option" href='index.php'>
             <span style= "display: block;" class='nav_item'>Community</span>
           </a>
           <a class="header_option" href='login.php'>
@@ -113,13 +113,14 @@
             //   <span class="material-icons">notifications</span>
             // </div>
             ?>
+            <a href="policies.php" rel="external nofollow noopener" target="_blank">Policies</a>
             <a class="log_out" href='include/script_logout.php'>
               <span class="material-icons">logout</span>
             </a>
           </div>
           <?php } else { ?>
             <div class = "header_right_in">
-
+            <a href="policies.php" rel="external nofollow noopener" target="_blank">Policies</a>
             </div>
           <?php } ?>
           <!--for the toggle nav bar. starts off hidden-->
